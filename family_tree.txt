@@ -1,0 +1,1290 @@
+Wall Street-grade, AI-powered trading architecture with elite-level system design. 
+
+🌟 What Stands Out:
+
+    - Modularity is textbook-perfect: Easily scalable, swappable strategies and models.
+
+    - GAN-based spread generation in synthetic/ is extremely rare—even hedge funds barely do this.
+
+    - Risk system has real teeth: black swans, drawdown planning, delta hedging—this is how pro desks survive chaos.
+
+    - Chaos testing with chaos_engine.py = you're thinking like Netflix SRE meets quant trader. Love it.
+
+    - Comprehensive use of AI across: feature engineering, GANs, RL, and strategy generation.
+
+Summary:
+
+    The system discovers stocks and shares to trade by cross-analyzing live market feeds, 
+    NLP-translated news, option chain behaviors, unusual activity, and AI-generated strategies. 
+    Trades only execute when the cognitive, risk, and performance layers align in real-time.
+
+IB_AI_Options_Trading_Pro/
+│
+├── LAUNCHERS/  # NEW SYSTEM CONTROL CENTER   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py # Mark as package
+│   │   ╰── 🔷 class LauncherConfig
+│   │   │      ├── 🔸 _COMPONENTS  # Component registry for lazy loading
+│   │   │      │     ├── 🔸 'SystemLauncher': '.system_launcher'
+│   │   │      │     ├── 🔸 'StrategyLoader': '.strategy_loader'
+│   │   │      │     ├── 🔸 'ServiceMonitor': '.service_monitor'
+│   │   │      │     ╰── 🔸 'RestartController': '.restart_controller'
+│   │   │      ├── 🔹 __getattr__
+│   │   │      ├── 🔹 initialize
+│   │   │      ╰── 🔹 initialize│
+│   │   ╰── 🔹 __all__
+│   │          ├── 🔸 'SystemLauncher'
+│   │          ├── 🔸 'StrategyLoader'
+│   │          ├── 🔸 'ServiceMonitor'
+│   │          ├── 🔸 'RestartController'
+│   │          ├── 🔸 'LauncherConfig'
+│   │          ├── 🔸 'initialize'
+│   │          ├── 🔸 '__version__'
+│   │          ╰── 🔸 '__launcher_api__'
+│   │    
+│   ├── migration_monitor.py
+│   │   ├── 🔷 class MigrationMetrics
+│   │   ├── 🔷 class MigrationMonitor
+│   │   │       ├── 🔹 __init
+│   │   │       ├── 🔹 log_call
+│   │   │       ├── 🔹 get_report
+│   │   │       ╰── 🔹 _generate_recommendation
+│   │   ╰── 🔹 __all__.append('MigrationMonitor')             
+│   │         
+│   ├── system_launcher.py     Master process manager  
+│   │   ├── 🔷 class SystemLauncher
+│   │   │      ├── 🔹 __init__
+│   │   │      ├── 🔹 launch_component
+│   │   │      ├── 🔹 start_system
+│   │   │      ╰── 🔹 run
+│   │   ╰── __name__ == "__main__"
+│   │          
+│   ├── strategy_loader.py     Dynamic strategy injector 
+│   │   ╰── 🔷 class StrategyLoader  
+│   │          ├── 🔹 __init__
+│   │          ├── 🔹 load_strategy
+│   │          ├── 🔹 unload_strategy
+│   │          ╰── 🔹 rotate_strategies
+│   │
+│   ├── service_monitor.py     Component health watchdog 🛠️ 
+│   │   ├── 🔷 class SystemHealth
+│   │   │      ├── 🔹 __init__
+│   │   │      ├── 🔹 _init_drift_monitor
+│   │   │      ├── 🔹 check_ports
+│   │   │      ├── 🔹 check_resources
+│   │   │      ├── 🔹 check_model_health
+│   │   │      ├── 🔹 _handle_drift_alert
+│   │   │      ├── 🔹 alert
+│   │   │      ╰── 🔹 full_health_check
+│   │   ╰── __name__ == "__main__"
+│   │  
+│   ╰── restart_controller.py      Crash recovery system   🔄
+│       ╰── 🔷 class RestartController
+│              ├── 🔹 __init__
+│              ├── 🔹 handle_failure
+│              ╰── 🔹 rotate_strategies
+│
+├── CORE_ENGINE/  # PHASE 1 COMPLETE   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py     # Core exports
+│   │   ╰── 🔷 class CoreConfig
+│   │          ├── 🔹 __getattr__
+│   │          ├── 🔹 initialize
+│   │          ╰── 🔹 __all__
+│   │                ├── 🔸 'QuantumTrader'
+│   │                ├── 🔸 'ExecutionEngine'
+│   │                ├── 🔸 'DataRouter'
+│   │                ├── 🔸 'CognitiveLayer'   
+│   │                ├── 🔸 'CoreConfig'
+│   │                ├── 🔸 'initialize'
+│   │                ├── 🔸 '__version__'
+│   │                ╰── 🔸 '__api_version__'    
+│   │ 
+│   ├── quantum_trader.py 🟢
+│   │   ├── 🔷 class QuantumTrader
+│   │   │      ├── 🔹 __init__
+│   │   │      ├── 🔹 _setup_zmq
+│   │   │      ├── 🔹 _execute_signal
+│   │   │      ├── 🔹 _update_positions
+│   │   │      ├── 🔹 _monitor_executions
+│   │   │      ├── 🔹 generate_signals
+│   │   │      ├── 🔹 run
+│   │   │      ╰── 🔹 _process_signals
+│   │   ╰── 🔹 __name__ == "__main__"
+│   │   
+│   ├── execution_engine.py  🟢 ⚡
+│   │   ├── 🔷 class ExecutionEngine
+│   │   │      ├── 🔹 __init__
+│   │   │      ├── 🔹 _setup_zmq
+│   │   │      ├── 🔹 _validate_order
+│   │   │      ├── 🔹 execute_order
+│   │   │      ╰── 🔹 run
+│   │   ╰── 🔹 __name__ == "__main__" 
+│   │
+│   ├── data_router.py 📡   
+│   │   ╰── 🔷 class DataRouter
+│   │          ├── 🔹 __init__
+│   │          ├── 🔹 _setup_logger
+│   │          ├── 🔹 route_data   
+│   │          ├── 🔹 _safe_send
+│   │          ├── 🔹 _update_feature_buffers
+│   │          ├── 🔹 get_market_state
+│   │          ├── 🔹 _monitor_throughput
+│   │          ╰── 🔹 shutdown
+│   │ 
+│   ╰── cognitive_layer.py  🧠  Real-time strategy feedback, Market regime adaptation
+│       ╰── 🔷 class DataRouter
+│              ├── 🔹 __init__
+│              ├── 🔹 process_signals
+│              ╰── 🔹 _generate_adaptive_signals   
+│           
+│            
+├── DATA_SYSTEMS/  🌐  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py     Unified data interface
+│   │   ├── 🔷 class DataConfig
+│   │   │      ╰── 🔹 from_env
+│   │   ├── 🔹 get_config
+│   │   ├── 🔹 reload_config
+│   │   ├── 🔷 class DataSystem
+│   │   │      ╰── 🔹 __init__
+│   │   ├── 🔸 _MODULES
+│   │   │      ├── 🔸 'MonteCarloEngine': 'synthetic.monte_carlo'
+│   │   │      ├── 🔸 'VolatilityGAN': 'synthetic.GAN_models.volatility_gan'
+│   │   │      ├── 🔸 'SpreadGenerator': 'synthetic.GAN_models.spread_generator'
+│   │   │      ├── 🔸 "MarketData": "live_feeds"
+│   │   │      ├── 🔸 "NewsIngestor": "live_feeds"
+│   │   │      ╰── 🔸 # Add more if needed
+│   │   ├── 🔷 class UnifiedDataInterface
+│   │   │      ├── 🔹 __init__
+│   │   │      ├── 🔹 __getattr__
+│   │   │      ├── 🔸 @lru_cache
+│   │   │      ├── 🔹 def get
+│   │   │      ╰── 🔹 _warm_start
+│   │   ╰── 🔹 __all__
+│   │          ├── 🔸 'MonteCarloEngine'
+│   │          ├── 🔸 'VolatilityGAN'
+│   │          ├── 🔸 'SpreadGenerator'
+│   │          ├── 🔸 'DataSystem'
+│   │          ├── 🔸 'UnifiedDataInterface'
+│   │          ├── 🔸 'get_config'
+│   │          ├── 🔸 'reload_config'
+│   │          ╰── 🔸 'DataConfig'
+│   │
+│   ├── hybrid.py
+│   │   ├── 🔷 class HybridDataSystem
+│   │   │      ├── 🔹 __init__
+│   │   │      ├── 🔹 get
+│   │   │      ├── 🔹 _should_use_modern  
+│   │   │      ╰── 🔹 _fallback_to_legacy
+│   │   ╰── 🔹 __all__.append('HybridDataSystem')      
+│   │          
+│   ├── live_feeds/  📶
+│   │   ├── market_data.py  📈    # Real-time TWS stream processor
+│   │   │   ╰── 🔷 class MarketDataEngine
+│   │   │          ├── 🔹 __init__
+│   │   │          ├── 🔹 _connect_nats
+│   │   │          ├── 🔹 start_stream
+│   │   │          ├── 🔹 _process_ticks
+│   │   │          ├── 🔹 _publish_ticks
+│   │   │          ├── 🔹 get_option_chain
+│   │   │          ├── 🔹 _calculate_iv
+│   │   │          ├── 🔹 connect
+│   │   │          ╰── 🔹 shutdown│
+│   │   │
+│   │   ├── news_ingestor.py  🗞️    # NewsAPI + NLP pipeline
+│   │   │   ╰── 🔷 class NewsProcessor
+│   │   │          ├── 🔹 __init__ 
+│   │   │          ╰── 🔹 fetch_news
+│   │   │ 
+│   │   ╰── unusual_activity.py 🕵️‍♂️   # Flow monitoring alerts
+│   │       ╰── 🔷 class FlowAnomalyDetector
+│   │              ├── 🔹 __init__ 
+│   │              ╰── 🔹 check_anomaly
+│   │
+│   ├── historical/ 🗃️  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   │   ├── __init__.py       Historical data exports
+│   │   │   ├── 🔷 class HistoricalConfig
+│   │   │   ├── 🔷 class OptionChainManager
+│   │   │   │      ├── 🔹 __init
+│   │   │   │      ├── 🔹 _get_file
+│   │   │   │      ├── 🔹 _cleanup_files
+│   │   │   │      ├── 🔸 @lru_cache
+│   │   │   │      ├── 🔹 get_chain
+│   │   │   │      ╰── 🔹 store_chain
+│   │   │   ├── 🔷 class RegimeClassifier
+│   │   │   │      ├── 🔹 __init__
+│   │   │   │      ├── 🔹 _load_mode
+│   │   │   │      ├── 🔸 @lru_cache
+│   │   │   │      ╰── 🔹 def classify_market       
+│   │   │   ╰── __all__
+│   │   │          ├── 🔸 'OptionChainManager'
+│   │   │          ├── 🔸 'RegimeClassifier'
+│   │   │          ├── 🔸 'HistoricalConfig'
+│   │   │          ├── 🔸 '__version__' 
+│   │   │          ╰── 🔸 '__hdf5_version__ 
+│   │   │
+│   │   ├── option_chains/ 📂     # HDF5 storage format, HDF5 compression, Fast retrieval
+│   │   │   ╰── processor.py    
+│   │   │       ╰── 🔷 class OptionChainStorage
+│   │   │              ├── 🔹 __init__
+│   │   │              ├── 🔹 save_chain
+│   │   │              ╰── 🔹 load_chain
+│   │   │  
+│   │   ╰── regime_datasets/ 📂   🎚️   # Labeled market states
+│   │       ╰── regime_classifier.py 
+│   │           ╰── 🔷 class MarketRegimeClassifier
+│   │                  ├── 🔹 __init__
+│   │                  ├── 🔹 train
+│   │                  ╰── 🔹 predict_regime
+│   │
+│   ╰── 🔮 synthetic/ 📂   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│       ├── __init__.py     Synthetic data exports  """Central data system configuration"""
+│       │   ├── 🔷 class DataConfig
+│       │   │      ├── 🔸 @staticmethod
+│       │   │      ╰── 🔹 from_env
+│       │   ├── 🔹 get_config 
+│       │   ├── 🔹 reload_config
+│       │   ├── 🔷 class DataSystem 
+│       │   │      ╰── 🔹 __init__ 
+│       │   ├── 🔸 _MODULES
+│       │   │      ├── 🔸 'MonteCarloEngine': 'synthetic.monte_carlo'
+│       │   │      ├── 🔸 'VolatilityGAN': 'synthetic.GAN_models.volatility_gan'
+│       │   │      ├── 🔸 'SpreadGenerator': 'synthetic.GAN_models.spread_generator'
+│       │   │      ├── 🔸 "MarketData": "live_feeds"
+│       │   │      ╰── 🔸 "NewsIngestor": "live_feeds"
+│       │   ├── 🔷 class UnifiedDataInterface
+│       │   │      ├── 🔹 __init__
+│       │   │      ├── 🔹 __getattr__
+│       │   │      ├── 🔸 @lru_cache
+│       │   │      ├── 🔹 get
+│       │   │      ╰── 🔹 _warm_start
+│       │   ╰── 🔹 __all__
+│       │          ├── 🔸 'MonteCarloEngine'
+│       │          ├── 🔸 'VolatilityGAN'
+│       │          ├── 🔸 'SpreadGenerator'
+│       │          ├── 🔸 'DataSystem'
+│       │          ├── 🔸 'UnifiedDataInterface'
+│       │          ├── 🔸 'get_config'
+│       │          ├── 🔸 'reload_config'
+│       │          ╰── 🔸 'DataConfig'
+│       │
+│       ├── monte_carlo.py 🌪️          Options scenario generator
+│       │   ╰── 🔷 class OptionScenarioGenerator
+│       │          ├── 🔹 __init__
+│       │          ├── 🔹 generate_paths
+│       │          ╰── 🔹 calculate_prob_itm
+│       │
+│       ╰── 🧩 GAN_models/ 📂           Market behavior GANs
+│           ├── volatility_gan.py 
+│           │   ╰── 🔷 class VolatilityGAN
+│           │          ├── 🔹 __init__
+│           │          ╰── 🔹 generate
+│           │
+│           ╰── spread_generator.py  Generate synthetic spreads, Train on historical arbitrage ops 
+│               ╰── 🔷 class SpreadGAN
+│                      ├── 🔹 __init__
+│                      ╰── 🔹 generate_spread
+│
+├── AI_MODELS/ 🧠   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py     AI root exports
+│   │   ├── 🔹 __all__ 
+│   │   │     ├── 🔸 'EnsembleStrategyGenerator'
+│   │   │     ├── 🔸 'DeepMarketModel'
+│   │   │     ├── 🔸 'PolicyNetwork'
+│   │   │     ├── 🔸 'ExperienceBuffer'
+│   │   │     ├── 🔸 'GreekFeaturePipeline'
+│   │   │     ├── 🔸 'LatentSpaceEncoder'
+│   │   │     ├── 🔸 'TemporalPatternEncoder'
+│   │   │     ├── 🔸 'ModelValidator'
+│   │   │     ├── 🔸 'ModelVersionControl'
+│   │   │     ╰── 🔸 'ConceptDriftDetector'
+│   │   ├── 🔹 get_model_registry
+│   │   ╰── 🔹 warmup_models
+│   │    
+│   ├── strategy_generators/ 🎯
+│   │   ├──  __init__.py
+│   │   │    ├── 🔹 __all__
+│   │   │    │    ├── 🔸 'EnsembleStrategyGenerator'
+│   │   │    │    ├── 🔸 'MODEL_VOTING_SYSTEMS'
+│   │   │    │    ├── 🔸 'STRATEGY_WEIGHTING_METHODS'
+│   │   │    │    ├── 🔸 'create_ensemble_model'
+│   │   │    │    ├── 🔸 'evaluate_strategy_performance'
+│   │   │    │    ├── 🔸 'DeepMarketPredictor'
+│   │   │    │    ├── 🔸 'LSTMMarketModel'
+│   │   │    │    ├── 🔸 'TemporalFusionTransformer'
+│   │   │    │    ├── 🔸 'NEURAL_ARCHITECTURES'
+│   │   │    │    ├── 🔸 'train_neural_strategy'
+│   │   │    │    ├── 🔸 'predict_market_regimes'
+│   │   │    │    ├── 🔸 'generate_ai_strategy'
+│   │   │    │    ├── 🔸 'optimize_strategy_parameters'
+│   │   │    │    ╰── 🔸 'get_available_generators'
+│   │   │    ├── 🔹 generate_ai_strategy
+│   │   │    ├── 🔹 optimize_strategy_parameters
+│   │   │    ╰── 🔹 get_available_generators
+│   │   │ 
+│   │   ├── ensemble_learner.py 🤖        Model voting system
+│   │   │   ╰── 🔷 class OptionStrategyEnsemble
+│   │   │          ├── 🔹 __init__
+│   │   │          ├── 🔹 train
+│   │   │          ╰── 🔹 predict_strategy
+│   │   │ 
+│   │   ├── deep_architecture.py  🕸️   Integrated with ensemble_learner.py, LSTM-based market model,  TensorFlow/Keras NN
+│   │   │   ╰── 🔷 class MarketLSTM
+│   │   │          ├── 🔹 __init__
+│   │   │          ├── 🔹 call
+│   │   │          ╰── 🔹 generate_signal
+│   │   │ 
+│   │   ╰── reinforcement_agent/  🦾
+│   │       ├── __init__.py
+│   │       │   ╰── 🔷class RLAgent
+│   │       │         ├── 🔹 __init__
+│   │       │         ├── 🔹 get_action
+│   │       │         ├── 🔹 store_experience
+│   │       │         ├── 🔹 update_policy
+│   │       │         ├── 🔹 train_episode
+│   │       │         ├── 🔹 save_model
+│   │       │         ├── 🔹 load_model
+│   │       │         ╰── 🔹 _execute_action
+│   │       ├── policy_network.py 
+│   │       │   ╰── 🔷 class PolicyNetwork
+│   │       │          ├── 🔹 __init__
+│   │       │          ╰── 🔹 forward
+│   │       │    
+│   │       ╰── experience_buffer.py 
+│   │           ╰── 🔷 class ExperienceBuffer
+│   │                  ├── 🔹 __init__
+│   │                  ├── 🔹 add
+│   │                  ├── 🔹 sample
+│   │                  ╰── 🔹 __len__
+│   │
+│   ├── feature_engineering/ 🔍  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   │   ├── __init__.py   Feature engineering
+│   │   │   ├── 🔷 class FeatureEngine
+│   │   │   │      ╰── 🔹 __init__
+│   │   │   ├── 🔹 __all__  
+│   │   │   │     ├── 🔸 'GreekFeatureGenerator'
+│   │   │   │     ├── 🔸 'DeltaTransformer'
+│   │   │   │     ├── 🔸 'GammaTransformer'
+│   │   │   │     ├── 🔸 'VegaTransformer'
+│   │   │   │     ├── 🔸 'ThetaTransformer'
+│   │   │   │     ├── 🔸 'RhoTransformer'
+│   │   │   │     ├── 🔸 'VolgaTransformer'
+│   │   │   │     ├── 🔸 'VannaTransformer'
+│   │   │   │     ├── 🔸 'GreekPipeline'
+│   │   │   │     ├── 🔸 'create_feature_pipeline'
+│   │   │   │     ├── 🔸 'validate_feature_matrix'
+│   │   │   │     ├── 🔸 'persist_feature_pipeline'
+│   │   │   │     ├── 🔸 'LatentFeatureEncoder'
+│   │   │   │     ├── 🔸 'generate_latent_features'
+│   │   │   │     ├── 🔸 'load_pretrained_encoder'
+│   │   │   │     ├── 🔸 'TemporalPatternEncoder'
+│   │   │   │     ├── 🔸 'RollingWindowGenerator'
+│   │   │   │     ╰── 🔸 'TimeSeriesFeatureAggregator'
+│   │   │   ├── 🔹 get_default_pipeline_config
+│   │   │   ╰── 🔹 warmup_transformers
+│   │   │
+│   │   ├── greek_transformer.py  🧬     Advanced derivatives features
+│   │   │   ╰── 🔷 class GreekFeatureGenerator
+│   │   │          ├── 🔹 calculate_implied_volatility
+│   │   │          ├── 🔹 _bisection_iv
+│   │   │          ├── 🔹 calculate_all_greeks
+│   │   │          ╰── 🔹 black_scholes
+│   │   │ 
+│   │   ├── greek_pipeline.py  🚀
+│   │   │   ╰── 🔷 class GreekFeaturePipeline
+│   │   │          ├── 🔹 __init__
+│   │   │          ├── 🔹 update_all_greeks
+│   │   │          ╰── 🔹 add_temporal_features
+│   │   │ 
+│   │   ├── latent_space.py 🧩         Autoencoder features
+│   │   │   ╰── 🔷 class LatentSpaceEncoder
+│   │   │          ├── 🔹 __init__
+│   │   │          ╰── 🔹 call
+│   │   │
+│   │   ╰── temporal_encoder.py  ⏱️     Time-series patterns
+│   │       ├── 🔷 class EncodingMethod
+│   │       ├── 🔷 class TemporalFeatures
+│   │       ├── 🔷 class TemporalEncoder
+│   │       │       ├── 🔹 __init__
+│   │       │       ├── 🔹 _validate_parameters
+│   │       │       ├── 🔹 _build_neural_encoder
+│   │       │       ├── 🔹 _extract_statistical_features
+│   │       │       ├── 🔹 _estimate_hurst
+│   │       │       ├── 🔹 _encode_neural
+│   │       │       ├── 🔹 fit
+│   │       │       ├── 🔹 _create_sliding_windows
+│   │       │       ╰── 🔹 transform
+│   │       ╰── 🔹 __name__ == "__main__"
+│   │
+│   └── model_governance/ 🏆  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│       ├── __init__.py      Model ops
+│       │  ├── 🔹 __all__ 
+│       │  │     ├── 🔸 'ModelValidator'
+│       │  │     ├── 🔸 'BacktestRunner'
+│       │  │     ├── 🔸 'StressTestEvaluator'
+│       │  │     ├── 🔸 'generate_validation_report'
+│       │  │     ├── 🔸 'save_validation_results'
+│       │  │     ├── 🔸 'load_validation_results'
+│       │  │     ├── 🔸 'ModelRegistry'
+│       │  │     ├── 🔸 'ModelVersion'
+│       │  │     ├── 🔸 'promote_model_to_production'
+│       │  │     ├── 🔸 'rollback_model_version'
+│       │  │     ├── 🔸 'get_production_model'
+│       │  │     ├── 🔸 'export_model_package'
+│       │  │     ├── 🔸 'import_model_package'
+│       │  │     ├── 🔸 'validate_model_signature'
+│       │  │     ├── 🔸 'DriftDetector'
+│       │  │     ├── 🔸 'FeatureDriftAlert'
+│       │  │     ├── 🔸 'PerformanceDriftAlert'
+│       │  │     ╰── 🔸 'configure_drift_monitoring'
+│       │  ├── 🔹 initialize_governance
+│       │  ╰── 🔹 get_audit_logger 
+│       │
+│       ├── validation_suite.py  🧪     Backtest validation
+│       │   ├── 🔷 class TestType
+│       │   ├── 🔷 class ValidationResult
+│       │   ╰── 🔷 class ValidationSuite
+│       │          ├── 🔹 __init__
+│       │          ├── 🔹 _init_metrics
+│       │          ├── 🔹 _init_scenarios
+│       │          ├── 🔹 run_full_validation
+│       │          ├── 🔹 walk_forward_test
+│       │          ├── 🔹 regime_adaptive_test
+│       │          ├── 🔹 run_stress_test
+│       │          ├── 🔹 monte_carlo_test
+│       │          ├── 🔹 _calculate_metrics
+│       │          ╰── 🔹 _check_validation_results
+│       │ 
+│       ├── version_control.py  🔄      Model registry
+│       │   ╰── 🔷 class ModelRegistry
+│       │          ╰── 🔹 deploy_model
+│       │ 
+│       ╰── drift_monitor.py  📊         Concept drift detection
+│           ├── 🔷 class DriftType
+│           ├── 🔷 class DriftAlert
+│           ╰── 🔷 class DriftMonitor
+│                  ├── 🔹 __init__
+│                  ├── 🔹 _init_reference_stats
+│                  ├── 🔹 check_drift
+│                  ├── 🔹 _detect_feature_drift
+│                  ├── 🔹 _detect_concept_drift
+│                  ├── 🔹 _detect_covariate_shift
+│                  ├── 🔹 _calculate_performance
+│                  ├── 🔹 def _process_alerts
+│                  ├── 🔹 get_drift_report
+│                  ╰── 🔹 _calculate_feature_stability
+│                  
+│
+├── ⚖️ COMMON/    ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py   
+│   │   ╰── 🔹 __all__ = ['load_config', 'setup_logging', 'cached_data_load']
+│   │
+│   ├── config.py
+│   │   ╰── 🔹 load_config
+│   │
+│   ├── events.py
+│   │   ╰── 🔷 class EventBus
+│   │          ├── 🔹 subscribe
+│   │          ╰── 🔹 publish
+│   │
+│   ├── utils.py
+│   │   ╰── 🔹 retry
+│   │
+│   ╰── logging.py
+│       ╰── 🔹 get_logger
+│
+├── ⚖️ RISK_SYSTEM/  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py      Risk system root
+│   │   ├── 
+│   │   ├── 🔹 __all__ 
+│   │   │     ├── 🔸 'RiskEngine'
+│   │   │     ├── 🔸 'RiskModel'
+│   │   │     ├── 🔸 'PortfolioRiskView'
+│   │   │     ├── 🔸 'PositionRiskLimits'
+│   │   │     ├── 🔸 'BlackSwanDefender'
+│   │   │     ├── 🔸 'TailRiskScenario'
+│   │   │     ├── 🔸 'generate_stress_scenarios'
+│   │   │     ├── 🔸 'LiquidityMonitor'
+│   │   │     ├── 🔸 'FreezeAlert'
+│   │   │     ├── 🔸 'PortfolioStressTester'
+│   │   │     ├── 🔸 'run_scenario_analysis'
+│   │   │     ├── 🔸 'DynamicHedger'
+│   │   │     ├── 🔸 'DeltaHedgeOptimizer'
+│   │   │     ├── 🔸 'GreekCorrelationMatrix'
+│   │   │     ├── 🔸 'HedgeRatioCalculator'
+│   │   │     ├── 🔸 'CircuitBreaker'
+│   │   │     ├── 🔸 'TradingHaltTrigger'
+│   │   │     ├── 🔸 'DrawdownRecoveryPlanner'
+│   │   │     ╰── 🔸 'RecoveryStrategy'
+│   │   ├── 🔹 initialize_risk_system
+│   │   ╰── 🔹 get_risk_metrics
+│   │ 
+│   ├── core/  
+│   │   ╰── risk_engine.py      # CENTRAL RISK COORDINATOR
+│   │      ╰── 🔷 class RiskEngine
+│   │             ├── 🔹 __init
+│   │             ├── 🔹 evaluate_portfolio
+│   │             ├── 🔹 _determine_actions
+│   │             ╰── 🔹 _execute_actions
+│   │ 
+│   ├── 🛡️ armor/
+│   │   ├── __init__.py      Armor submodule
+│   │   │  ├── 🔹 __all__
+│   │   │  │     ├── 🔸 'BlackSwanShield'
+│   │   │  │     ├── 🔸 'TailRiskScenario'
+│   │   │  │     ├── 🔸 'BLACK_SWAN_EVENTS'
+│   │   │  │     ├── 🔸 'load_doomsday_scenarios'
+│   │   │  │     ├── 🔸 'trigger_defensive_hedging'
+│   │   │  │     ├── 🔸 'LiquidityCryoMonitor'
+│   │   │  │     ├── 🔸 'FreezeAlertLevel'
+│   │   │  │     ├── 🔸 'LIQUIDITY_TIERS'
+│   │   │  │     ├── 🔸 'detect_market_freezes'
+│   │   │  │     ├── 🔸 'emergency_liquidity_map'
+│   │   │  │     ├── 🔸 'PortfolioCrashTester'
+│   │   │  │     ├── 🔸 'StressScenario'
+│   │   │  │     ├── 🔸 'HISTORICAL_CRASHES'
+│   │   │  │     ├── 🔸 'run_collapse_simulation'
+│   │   │  │     ╰── 🔸 'generate_stress_report'
+│   │   │  ├── 🔹 activate_defensive_protocols
+│   │   │  ╰── 🔹  get_armor_dashboard
+│   │   │
+│   │   ├── black_swan.py  ☢️      # Tail risk scenarios
+│   │   │  ╰── 🔷 class BlackSwanDetector
+│   │   │      ├── 🔹 __init__
+│   │   │      ╰── 🔹 detect_anomaly
+│   │   │ 
+│   │   ├── freeze_detector.py  🧊    # Liquidity alarms
+│   │   │   ╰── 🔷 class LiquidityFreezeDetector
+│   │   │          ├── 🔹 update_baseline
+│   │   │          ╰── 🔹 check_freeze
+│   │   │ 
+│   │   ╰── stress_test.py  💥       # Portfolio stress tests
+│   │       ├── 🔷 class StressScenario
+│   │       ╰── 🔷 class PortfolioStressTester
+│   │              ├── 🔹 test_portfolio
+│   │              ╰── 🔹 _calculate_shock_pnl
+│   │ 
+│   ├── hedging/  ⚓  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   │   ├── __init__.py      Hedging submodule
+│   │   │  ├── 🔹 __all__
+│   │   │  │     ├── 🔸 'DynamicHedgeMaster'
+│   │   │  │     ├── 🔸 'HedgePosition'
+│   │   │  │     ├── 🔸 'HedgeAdjustmentSignal'
+│   │   │  │     ├── 🔸 'HedgeEffectivenessScore'
+│   │   │  │     ├── 🔸 'AI_HEDGE_STRATEGIES'
+│   │   │  │     ├── 🔸 'execute_auto_hedge'
+│   │   │  │     ├── 🔸 'calculate_delta_exposure'
+│   │   │  │     ├── 🔸 'GreekCorrelationOptimizer'
+│   │   │  │     ├── 🔸 'HedgeRatioCalculator'
+│   │   │  │     ├── 🔸 'GreekCluster'
+│   │   │  │     ├── 🔸 'PORTFOLIO_GREEK_LIMITS'
+│   │   │  │     ├── 🔸 'compute_cross_greek_sensitivities'
+│   │   │  │     ╰── 🔸 'generate_hedge_efficiency_report'
+│   │   │  ├── 🔹 activate_defensive_protocols
+│   │   │  ╰── 🔹  get_armor_dashboard
+│   │   │
+│   │   ├── dynamic_delta.py  🌓     # Auto-hedging engine
+│   │   │   ╰── 🔷 class DeltaHedger
+│   │   │          ├── 🔹 __init__
+│   │   │          ╰── 🔹 calculate_hedge
+│   │   │  
+│   │   ╰── correlation_matrix.py  🧩     # Greeks optimizer
+│   │       ╰── 🔷 class DeltaHedger
+│   │              ├── 🔹 __init__
+│   │              ╰── 🔹 calculate_hedge
+│   │
+│   ╰── drawdown_control/  📉  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│       ├── __init__.py       Drawdown submodule
+│       │  ├── 🔹 __all__
+│       │  │     ├── 🔸 'CircuitBreakerController'
+│       │  │     ├── 🔸 'TradingHaltTrigger'
+│       │  │     ├── 🔸 'BREAKER_LEVELS'
+│       │  │     ├── 🔸 'HALT_COOLOFF_PERIODS'
+│       │  │     ├── 🔸 'trigger_emergency_halt'
+│       │  │     ├── 🔸 'get_halting_rules'
+│       │  │     ├── 🔸 'DrawdownSurgeon'
+│       │  │     ├── 🔸 'RecoverySequence'
+│       │  │     ├── 🔸 'RECOVERY_STRATEGIES'
+│       │  │     ├── 🔸 'generate_recovery_plan'
+│       │  │     ├── 🔸 'execute_liquidity_preservation'
+│       │  │     ╰── 🔸 'portfolio_triage_assessment'
+│       │  ├── 🔹 activate_drawdown_defenses
+│       │  ├── 🔹 execute_recovery_sequence
+│       │  ╰── 🔹 get_drawdown_dashboard
+│       │ 
+│       ├──  circuit_breaker.py  🚦     # Trading halt logic
+│       │     ╰── 🔷 class CircuitBreaker
+│       │            ├── 🔹 __init__
+│       │            ├── 🔹 check_breach
+│       │            ╰── 🔹 handle_breach
+│       │ 
+│       ╰──  recovery_planner.py  🩹  # Drawdown response
+│             ╰── 🔷 class CircuitBreaker
+│                    ├── 🔹 __init__
+│                    ╰── 🔹 get_action_plan
+│
+├──  STRATEGY_VAULT/  📊  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py       Strategy root  
+│   │  ├── 🔹 __all__
+│   │  │     ├── 🔸 'VolatilityRegimeStrategy'
+│   │  │     ├── 🔸 'SpreadOptimizer'
+│   │  │     ├── 🔸 'ExoticProductEngine'
+│   │  │     ├── 🔸 'GeneticStrategyEvolver'
+│   │  │     ├── 🔸 'StrategyCombinator'
+│   │  │     ├── 🔸 'load_prebuilt_strategy'
+│   │  │     ├── 🔸 'create_hybrid_strategy'
+│   │  │     ╰── 🔸 'backtest_strategy_combo'
+│   │  ├── 🔹 load_prebuilt_strategy
+│   │  ├── 🔹 create_hybrid_strategy
+│   │  ╰── 🔹 get_strategy_registry
+│   │ 
+│   ├── modular_strategies/   🧩
+│   │   ├── __init__.py      Strategy types 
+│   │   │   ├── 🔹 __all__
+│   │   │   │     ├── 🔸 'VolatilityRegimeStrategy'
+│   │   │   │     ├── 🔸 'create_regime_adaptive_strategy',
+│   │   │   │     ├── 🔸 'REGIME_TYPES'
+│   │   │   │     ├── 🔸 'get_current_regime'
+│   │   │   │     ├── 🔸 'SpreadOptimizer'
+│   │   │   │     ├── 🔸 'optimize_iron_condor'
+│   │   │   │     ├── 🔸 'optimize_butterfly'
+│   │   │   │     ├── 🔸 'calculate_edge_ratios'
+│   │   │   │     ├── 🔸 'SPREAD_TYPES'
+│   │   │   │     ├── 🔸 'ExoticProductEngine'
+│   │   │   │     ├── 🔸 'price_autocallable'
+│   │   │   │     ├── 🔸 'price_accumulator'
+│   │   │   │     ├── 🔸 'EXOTIC_PRODUCTS'
+│   │   │   │     ╰── 🔸  'validate_exotic_payoff'
+│   │   │   ╰── 🔹 get_strategy_templates
+│   │   │ 
+│   │   ├── volatility_regime.py  🕰️       Market-state ML
+│   │   │    ╰── 🔷 class VolatilityStrategy
+│   │   │           ├── 🔹 __init__'
+│   │   │           ├── 🔹 analyze_market'
+│   │   │           ├── 🔹 _extract_features
+│   │   │           ├── 🔹 _calculate_skew
+│   │   │           ├── 🔹 _calculate_term_structure
+│   │   │           ├── 🔹 _detect_regime
+│   │   │           ╰── 🔹 _generate_signals
+│   │   │
+│   │   ├── spread_optimizer.py  🎭       AI-enhanced spreads
+│   │   │    ╰── 🔷 class SpreadOptimizer
+│   │   │           ├── 🔹 __init__'
+│   │   │           ├── 🔹 optimize_ratio
+│   │   │           ╰── 🔹 _calculate_expected_return
+│   │   │
+│   │   ╰──  exotic_pricer.py       # Structured products
+│   │        ├── 🔷 class ExoticType
+│   │        ├── 🔷 class ExoticProduct
+│   │        ├── 🔷 class ExoticPricer
+│   │        │      ╰── 🔹 price 
+│   │        ├── 🔷 class MonteCarloPricer
+│   │        │      ├── 🔹 __init__
+│   │        │      ├── 🔹 price
+│   │        │      ├── 🔹 _price_autocallable
+│   │        │      ├── 🔹 _price_barrier
+│   │        │      ├── 🔹 _price_asian
+│   │        │      ╰── 🔹 _price_cliquet
+│   │        ├── 🔷 class AnalyticPricer
+│   │        │      ├── 🔹 price
+│   │        │      ╰── 🔹 _analytic_barrier
+│   │        ├── 🔷 class ExoticPricingEngine
+│   │        │      ├── 🔹 __init__
+│   │        │      ├── 🔹 price
+│   │        │      ╰── 🔹 _price_autocallable
+│   │        ╰── 🔹 __name__ == "__main__"
+│   │
+│   ├── strategy_lab/  🧪   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   │   ├── __init__.py        Lab tools
+│   │   │   ╰── __all__
+│   │   │         ├── 🔸 'GeneticStrategyEvolver'
+│   │   │         ├── 🔸 'evolve_strategy_generation'
+│   │   │         ├── 🔸 'STRATEGY_GENES'
+│   │   │         ├── 🔸 'MUTATION_RATES'
+│   │   │         ├── 🔸 'create_strategy_mutation'
+│   │   │         ├── 🔸 'calculate_fitness_score'
+│   │   │         ├── 🔸 'StrategyCombinator'
+│   │   │         ├── 🔸 'test_strategy_combo'
+│   │   │         ├── 🔸 'hybridize_strategies'
+│   │   │         ├── 🔸 'COMBO_METRICS'
+│   │   │         ╰── 🔸 'optimize_strategy_mix'
+│   │   │ 
+│   │   ├── genetic_evolver.py  🧬     GA strategy designer
+│   │   │   ╰── 🔷 class StrategyEvolver
+│   │   │          ├── 🔹 __init__
+│   │   │          ╰── 🔹 generate_candidates
+│   │   │ 
+│   │   └── 🧫 combinatorics.py         Strategy mixing
+│   │       ├── 🔷 class Strategy
+│   │       ├── 🔷 class StrategyCombinator
+│   │       │      ├── 🔹 __init__
+│   │       │      ├── 🔹 optimize_weights
+│   │       │      ├── 🔹 _sharpe_optimization
+│   │       │      ├── 🔹 _min_variance_optimization
+│   │       │      │      ╰── 🔹 portfolio_variance
+│   │       │      ├── 🔹 _equal_risk_contribution
+│   │       │      │      ╰── 🔹 risk_contribution
+│   │       │      ├── 🔹 _get_combined_returns
+│   │       │      ├── 🔹 create_meta_strategy
+│   │       │      ╰── 🔹 analyze_correlation
+│   │       ╰── 🔹 __name__ == "__main__"
+│   │
+│   └── 📜 strategy_tomes/          # Pre-built strategies
+│       ├── 📜 strategy_tomes
+│       └── 📜 gamma_scalper.json
+│
+├── ⚡ PERFORMANCE/  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py       Performance root 
+│   │  ├── 🔹 __all__
+│   │  │     ├── 🔸 'PerformanceSystem'
+│   │  │     ├── 🔸 'calculate_var'
+│   │  │     ├── 🔸 'analyze_trade_attribution'
+│   │  │     ├── 🔸 'generate_compliance_report'
+│   │  │     ├── 🔸 'WalkforwardTester'
+│   │  │     ├── 🔸 'run_regime_aware_test'
+│   │  │     ├── 🔸 'WALKFORWARD_METRICS'
+│   │  │     ├── 🔸 'LiveDashboard'
+│   │  │     ├── 🔸 'TradeReplayer'
+│   │  │     ├── 🔸 'create_custom_dashboard'
+│   │  │     ├── 🔸 'DASHBOARD_TEMPLATES'
+│   │  │     ├── 🔸 'analyze_portfolio'
+│   │  │     ╰── 🔸 'get_performance_tools'
+│   │  ├── 🔹 analyze_portfolio
+│   │  ├── 🔹 get_performance_tools
+│   │  ├── 🔹 _prepare_dashboard_data
+│   │  ╰── 🔹 ginitialize_performance_monitoring
+│   │
+│   ├── advanced_metrics/   📈
+│   │   ├── __init__.py      Metrics exports
+│   │   │   ├── 🔹 __all__
+│   │   │   │      ├── 🔸 'PnLSimulator'
+│   │   │   │      ├── 🔸 'run_monte_carlo_simulation'
+│   │   │   │      ├── 🔸 'calculate_var'
+│   │   │   │      ├── 🔸 'calculate_cvar'
+│   │   │   │      ├── 🔸 'STRESS_SCENARIOS'
+│   │   │   │      ├── 🔸 'PROBABILISTIC_METRICS'
+│   │   │   │      ├── 🔸 'TradeAttributor'
+│   │   │   │      ├── 🔸 'analyze_trade_attribution'
+│   │   │   │      ├── 🔸 'WIN_LOSS_FACTORS'
+│   │   │   │      ├── 🔸 'generate_attribution_report'
+│   │   │   │      ├── 🔸 'PerformanceSystem'
+│   │   │   │      ├── 🔸 'POSITION_TRACKING_SCHEMA'
+│   │   │   │      ├── 🔸 'DEFAULT_REPORT_CONFIG'
+│   │   │   │      ├── 🔸 'generate_compliance_report'
+│   │   │   │      ╰── 🔸 'get_metric_templates'
+│   │   │   ├── 🔹 generate_compliance_report
+│   │   │   ├── 🔹 get_metric_templates
+│   │   │   ╰── 🔹 create_performance_system
+│   │   │
+│   │   ├── probabilistic_pnl.py  🎯  Monte Carlo sims, VaR calculations   # Monte Carlo PnL
+│   │   │   ╰── 🔷 class PnLSimulator
+│   │   │           ├── 🔹 __init__
+│   │   │           ╰── 🔹 calculate_var
+│   │   │  
+│   │   ╰─── attribution_engine.py   🕵️‍♂️   Win/loss forensics    Strategy decomposer 
+│   │        ├── 🔷 class LuckDetectionResult
+│   │        ├── 🔷 class EnhancedAttributionEngine
+│   │        │      ├── 🔹 __init__
+│   │        │      ├── 🔹 _init_luck_model
+│   │        │      ├── 🔹 detect_luck
+│   │        │      ├── 🔹 _create_luck_features
+│   │        │      ├── 🔹 _calculate_edge_deviation
+│   │        │      ├── 🔹 _bayesian_update
+│   │        │      ├── 🔹 _get_strategy_prior
+│   │        │      ├── 🔹 _parse_shap
+│   │        │      ├── 🔹 train_luck_model
+│   │        │      ├── 🔹 _prepare_training_data
+│   │        │      ├── 🔹 _calibrate_contamination
+│   │        │      ╰── 🔹 _get_feature_names
+│   │        ╰── 🔹 __name__ == "__main__"
+│   │
+│   ├── 🔄 walk_forward/   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   │   ├── __init__.py       Walkforward tests
+│   │   │   ├── 🔹 __all__
+│   │   │   │      ├── 🔸 'RegimeAwareTester'
+│   │   │   │      ├── 🔸 'run_regime_aware_test'
+│   │   │   │      ├── 🔸 'REGIME_TESTING_PARAMS'
+│   │   │   │      ├── 🔸 'calculate_cvar'
+│   │   │   │      ├── 🔸 'get_regime_boundaries'
+│   │   │   │      ├── 🔸 'ParameterRobustnessAnalyzer'
+│   │   │   │      ├── 🔸 'parameter_robustness_check'
+│   │   │   │      ├── 🔸 'generate_parameter_sensitivity'
+│   │   │   │      ├── 🔸 'ROBUSTNESS_METRICS'
+│   │   │   │      ├── 🔸 'find_optimal_parameter_ranges'
+│   │   │   │      ╰── 🔸 'generate_walkforward_report'
+│   │   │   ├── 🔹 generate_walkforward_report
+│   │   │   ╰── 🔹 get_testing_templates
+│   │   │ 
+│   │   ├── regime_aware.py   🕰️    Time-period testing
+│   │   │    ╰── 🔷 class RegimeAwareTester
+│   │   │           ├── 🔹 __init__
+│   │   │           ╰── 🔹 run_test
+│   │   │
+│   │   └── robustness_check.py   🧪    Parameter stress tests
+│   │        ╰── 🔷 class RobustnessValidator
+│   │               ├── 🔹 __init__
+│   │               ╰── 🔹 parameter_sweep
+│   │
+│   └── visualization/   📊
+│       ├── __init__.py     Viz exports
+│       │   ├── 🔹 __all__
+│       │   │      ├── 🔸 'LivePerformanceDashboard'
+│       │   │      ├── 🔸 'DASHBOARD_LAYOUTS'
+│       │   │      ├── 🔸 'configure_live_datafeed'
+│       │   │      ├── 🔸 'add_custom_metrics'
+│       │   │      ├── 🔸 'DEFAULT_DASH_CONFIG'
+│       │   │      ├── 🔸 'TradeReplayer'
+│       │   │      ├── 🔸 'ReplayEngine'
+│       │   │      ├── 🔸 'create_replay_scenario'
+│       │   │      ├── 🔸 'REPLAY_SPEEDS'
+│       │   │      ├── 🔸 'generate_replay_report'
+│       │   │      ├── 🔸 'MigrationMonitor'
+│       │   │      ├── 🔸 'track_performance_migration'
+│       │   │      ├── 🔸 'MIGRATION_METRICS'
+│       │   │      ├── 🔸 'VisualizationSystem'
+│       │   │      ├── 🔸 'TradingDashboard'
+│       │   │      ├── 🔸 'CoreReplayer'
+│       │   │      ├── 🔸 'create_custom_viz'
+│       │   │      ╰── 🔸 'export_dashboard_config'
+│       │   ├── 🔹 create_custom_viz
+│       │   ├── 🔹 export_dashboard_config
+│       │   ├── 🔹 isinstance
+│       │   ├── 🔹 upgrade_production_system
+│       │   ╰── 🔹 get_visualization_tools
+│       │
+│       ├── live_dashboard.py  🎛️   Plotly/Dash UI
+│       │   ╰── 🔷 class TradingDashboard
+│       │          ├── 🔹 __init__
+│       │          ╰── 🔹 _create_pnl_figure
+│       │ 
+│       ├── migration_dashboard.py
+│       │   ├── 🔷 class MigrationDashboard
+│       │   │      ├── 🔹 __init__
+│       │   │      ├── 🔹 update│
+│       │   │      ╰── 🔹 _prepare_data
+│       │   ╰── 🔹 __all__.append('MigrationDashboard')
+│       │   
+│       └── trade_replayer.py  🕵️‍♂️   Historical replay
+│           ╰── 🔷 class TradeReplayer
+│                  ├── 🔹 __init__
+│                  ╰── 🔹 animate_trades
+│
+├── 🛠️ DEV_TOOLS/  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py     Tools root
+│   │   │  ╰── 🔹 __all__
+│   │   │         ├── 🔸 'StrategyAssembler'
+│   │   │         ├── 🔸 'BacktestDesigner'
+│   │   │         ├── 🔸 'GUI_CONFIG_PRESETS'
+│   │   │         ├── 🔸 'SCENARIO_TEMPLATES'
+│   │   │         ├── 🔸 'build_custom_strategy'
+│   │   │         ├── 🔸 'TradeReplayer'
+│   │   │         ├── 🔸 'ReplayEngine'
+│   │   │         ├── 🔸 design_backtest_scenario'
+│   │   │         ├── 🔸 'ChaosEngine'
+│   │   │         ├── 🔸 'create_test_environment'
+│   │   │         ├── 🔸 'run_integration_suite'
+│   │   │         ├── 🔸 'TESTING_PROFILES'
+│   │   │         ├── 🔸 'get_dev_toolkit'
+│   │   │         ╰── 🔸 'initialize_dev_workspace'
+│   │   ├── 🔹 get_dev_toolkit
+│   │   ├── 🔹 initialize_dev_workspace
+│   │   ├── 🔹 create_strategy_template
+│   │   ╰── 🔹 build_scenario_package
+│   │
+│   ├── builder_kit/  🧰   Institutional Strategy Fabrication System
+│   │   ├── __init__.py      Builder tools
+│   │   │   ├── 🔹 __all__
+│   │   │   │      ├── 🔸 'StrategyAssembler'
+│   │   │   │      ├── 🔸 STRATEGY_COMPONENTS'
+│   │   │   │      ├── 🔸 'VALIDATION_RULES'
+│   │   │   │      ├── 🔸 'assemble_strategy_from_config'
+│   │   │   │      ├── 🔸 'export_strategy_package'
+│   │   │   │      ├── 🔸 'BacktestDesigner'
+│   │   │   │      ├── 🔸 'SCENARIO_ELEMENTS'
+│   │   │   │      ├── 🔸 'HISTORICAL_PERIODS'
+│   │   │   │      ├── 🔸 'build_custom_scenario'
+│   │   │   │      ├── 🔸 'optimize_scenario_parameters'
+│   │   │   │      ├── 🔸 'validate_backtest_setup'
+│   │   │   │      ├── 🔸 'create_strategy_blueprint'
+│   │   │   │      ├── 🔸 'build_complete_scenario'
+│   │   │   │      ╰── 🔸 'get_available_templates'
+│   │   │   ├── 🔹 create_strategy_blueprint
+│   │   │   ├── 🔹 build_complete_scenario
+│   │   │   ├── 🔹 get_available_templates
+│   │   │   ╰── 🔹 _get_required_data
+│   │   │
+│   │   ├── strategy_assembler.py   🧩   GUI configurator
+│   │   │   ├── 🔷 class StrategyComponent
+│   │   │   ├── 🔷 class StrategyAssembler
+│   │   │   │      ├── 🔹 __init__
+│   │   │   │      ├── 🔹 _init_ui
+│   │   │   │      ├── 🔹 _create_component_palette
+│   │   │   │      ├── 🔹 _create_assembly_canvas
+│   │   │   │      ├── 🔹 _create_parameter_editor
+│   │   │   │      ├── 🔹 _create_control_panel
+│   │   │   │      ├── 🔹 _load_components
+│   │   │   │      ├── 🔹 _add_component
+│   │   │   │      ├── 🔹 _draw_component
+│   │   │   │      ├── 🔹 _update_parameter_editor
+│   │   │   │      ├── 🔹 _save_strategy
+│   │   │   │      ├── 🔹 _load_strategy
+│   │   │   │      ├── 🔹 _generate_code
+│   │   │   │      ├── 🔹 _validate_strategy
+│   │   │   │      ├── 🔹 _export_to_backtester
+│   │   │   │      ╰── 🔹 run
+│   │   │   ╰── 🔹 __name__ == "__main__"    
+│   │   │ 
+│   │   ╰── backtest_builder.py  🏗️   Scenario designer
+│   │       ├── 🔷 class BacktestScenario
+│   │       ├── 🔷 class BacktestBuilder
+│   │       │      ├── 🔹 __init__
+│   │       │      ├── 🔹 _init_ui
+│   │       │      ├── 🔹 _new_scenario
+│   │       │      ├── 🔹 _run_scenario
+│   │       │      ├── 🔹 _run_batch
+│   │       │      ├── 🔹 _export_results
+│   │       │      ├── 🔹 _load_default_scenarios
+│   │       │      ├── 🔹 _get_scenario_data
+│   │       │      ├── 🔹 _generate_monte_carlo_data
+│   │       │      ├── 🔹 _execute_backtest
+│   │       │      ├── 🔹 _display_results
+│   │       │      ╰── 🔹 run
+│   │       ╰── 🔹 __name__ == "__main__"
+│   │
+│   ╰── testing/   🧪
+│       ├── __init__.py    Testing framework
+│       │   ├── 🔹 __all__
+│       │   │      ├── 🔸 'ChaosEngine'
+│       │   │      ├── 🔸 'FAILURE_MODES'
+│       │   │      ├── 🔸 'SYSTEM_COMPONENTS'
+│       │   │      ├── 🔸 'create_failure_scenario'
+│       │   │      ├── 🔸 'simulate_cascading_failure'
+│       │   │      ├── 🔸 'run_resilience_test'
+│       │   │      ├── 🔸 'run_unit_test_suite'
+│       │   │      ├── 🔸 'UNIT_TEST_REGISTRY'
+│       │   │      ├── 🔸 'create_unit_test'
+│       │   │      ├── 🔸 'coverage_report'
+│       │   │      ├── 🔸 'run_integration_test'
+│       │   │      ├── 🔸 'INTEGRATION_TEST_CATALOG'
+│       │   │      ├── 🔸 'build_integration_scenario'
+│       │   │      ├── 🔸 'validate_system_interfaces'
+│       │   │      ├── 🔸 'run_test_suite'
+│       │   │      ├── 🔸 'generate_test_report'
+│       │   │      ╰── 🔸 'get_test_coverage'
+│       │   ├── 🔹 run_test_suite
+│       │   ├── 🔹 generate_test_report
+│       │   ├── 🔹 get_test_coverage
+│       │   ╰── 🔹 create_test_environment
+│       │
+│       ├── 🐜 unit_tests/
+│       ├── 🦎 integration/
+│       ╰── chaos_engine.py  🧟     Failure simulation
+│           ╰── 🔷 class ChaosEngine
+│                  ├── 🔹 __init__
+│                  ├── 🔹 inject_failure
+│                  ╰── 🔹 network_latency
+│
+├── 🌉 INTERFACES/   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py      Interfaces root
+│   │   │  ╰── 🔹 __all__
+│   │   │         ├── 🔸 'IBGatewayAdapter'
+│   │   │         ├── 🔸 'BrokerAbstractInterface'
+│   │   │         ├── 🔸 'ADAPTER_CONFIG_SCHEMAS'
+│   │   │         ├── 🔸 'create_broker_connection'
+│   │   │         ├── 🔸 'validate_broker_credentials'
+│   │   │         ├── 🔸 'SnowflakeLoader'
+│   │   │         ├── 🔸 'RedisCache'
+│   │   │         ├── 🔸 'STORAGE_BACKENDS'
+│   │   │         ├── 🔸 'get_storage_client'
+│   │   │         ├── 🔸 'configure_persistence_layer'
+│   │   │         ├── 🔸 'get_broker_adapter'
+│   │   │         ├── 🔸 'get_storage_handler'
+│   │   │         ├── 🔸 'configure_interface'
+│   │   │         ├── 🔸 'list_available_adapters'
+│   │   │         ╰── 🔸 'verify_interface_health'
+│   │   ├── 🔹 get_broker_adapter
+│   │   ├── 🔹 get_storage_handler
+│   │   ├── 🔹 configure_interface
+│   │   ╰── 🔹 list_available_adapters
+│   │
+│   ├── 💰 broker_adapters/
+│   │   ├── __init__.py       Broker exports
+│   │   │  ├── 🔹 __all__
+│   │   │  │      ├── 🔸 'IBGatewayAdapter'
+│   │   │  │      ├── 🔸 'IB_CONFIG_SCHEMA',
+│   │   │  │      ├── 🔸 'validate_ib_credentials'
+│   │   │  │      ├── 🔸 'check_ib_connection'
+│   │   │  │      ├── 🔸 'BrokerAbstractInterface'
+│   │   │  │      ├── 🔸 'OrderExecutionReport'
+│   │   │  │      ├── 🔸 'PositionSnapshot'
+│   │   │  │      ├── 🔸 'BrokerAuthConfig'
+│   │   │  │      ├── 🔸 'SUPPORTED_ORDER_TYPES'
+│   │   │  │      ├── 🔸 'create_broker_connection',
+│   │   │  │      ├── 🔸 'normalize_broker_config'
+│   │   │  │      ├── 🔸 'get_available_brokers'
+│   │   │  │      ╰── 🔸 'ping_broker_connection'
+│   │   │  ├── 🔹 create_broker_connection
+│   │   │  ├── 🔹 normalize_broker_config
+│   │   │  ├── 🔹 get_available_brokers
+│   │   │  ╰── 🔹 ping_broker_connection
+│   │   │
+│   │   ├── ib_gateway.py   ⚠️
+│   │   │  ╰── 🔷 class IBGateway
+│   │   │         ├── 🔹 __init__
+│   │   │         ╰── 🔹 def execute
+│   │   │ 
+│   │   └── api_abstract.py   📡   Broker-agnostic interface
+│   │       ├── 🔷 class Order
+│   │       ├── 🔷 class Position
+│   │       ├── 🔷 class BrokerAPI
+│   │       │        ├── 🔹 connect
+│   │       │        ├── 🔹 place_order
+│   │       │        ├── 🔹 cancel_order
+│   │       │        ├── 🔹 get_positions
+│   │       │        ├── 🔹 get_market_data
+│   │       │        ├── 🔹 normalize_symbol
+│   │       │        ╰── 🔹 validate_order
+│   │       ╰── 🔷 class BrokerAdapterFactory
+│   │                    ╰── 🔹 get_adapter
+│   │
+│   └── 🗄️ storage/   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│       ├── __init__.py     Storage exports
+│       │  ├── 🔹 __all__
+│       │  │      ├── 🔸 'SnowflakeLoader'
+│       │  │      ├── 🔸 'SNOWFLAKE_CONFIG_SCHEMA'
+│       │  │      ├── 🔸 'validate_snowflake_creds'
+│       │  │      ├── 🔸 'execute_warehouse_query'
+│       │  │      ├── 🔸 'BrokerAbstractInterface'
+│       │  │      ├── 🔸 'execute_warehouse_query'
+│       │  │      ├── 🔸 'bulk_load_to_snowflake'
+│       │  │      ├── 🔸 'RedisCache'
+│       │  │      ├── 🔸 'REDIS_CONFIG_SCHEMA'
+│       │  │      ├── 🔸 'create_redis_pool'
+│       │  │      ├── 🔸 'check_redis_health'
+│       │  │      ├── 🔸 'CACHE_STRATEGIES'
+│       │  │      ├── 🔸 'get_storage_client'
+│       │  │      ├── 🔸 'configure_storage_layer'
+│       │  │      ├── 🔸 'get_available_storage_backends'
+│       │  │      ╰── 🔸 'verify_storage_connection'
+│       │  ├── 🔹 get_storage_client
+│       │  ├── 🔹 configure_storage_layer
+│       │  ├── 🔹 get_available_storage_backends
+│       │  ╰── 🔹 verify_storage_connection
+│       │ 
+│       ├── snowflake_loader.py   ❄️   Data warehouse
+│       │   ╰── 🔷 class SnowflakeLoader
+│       │          ├── 🔹 __init__
+│       │          ├── 🔹 _connect
+│       │          ├── 🔹 execute_query
+│       │          ├── 🔹 load_dataframe
+│       │          ├── 🔹 get_option_chain
+│       │          ├── 🔹 close
+│       │          ├── 🔹 __enter__
+│       │          ╰── 🔹 __exit__
+│       │ 
+│       └── local_cache.py    🗃️      Redis-backed cache
+│            ╰── 🔷 class MarketDataCache
+│                    ├── 🔹 __init__
+│                    ├── 🔹 store
+│                    ╰── 🔹 retrieve
+│
+├── 📜 governance/  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   ├── __init__.py     Governance root
+│   │  ├── 🔹 __all__
+│   │  │      ├── 🔸 'AuditLogger'
+│   │  │      ├── 🔸 'FINRA_REQUIRED_FIELDS'
+│   │  │      ├── 🔸 'SEC_COMPLIANCE_TEMPLATES'
+│   │  │      ├── 🔸 'log_audit_event'
+│   │  │      ├── 🔸 'generate_compliance_report'
+│   │  │      ├── 🔸 'ARCHIVAL_POLICIES'
+│   │  │      ├── 🔸 'EthicsEngine'
+│   │  │      ├── 🔸 'TRADING_CONSTRAINTS'
+│   │  │      ├── 🔸 'RISK_LIMITS'
+│   │  │      ├── 🔸 'validate_trade_ethics'
+│   │  │      ├── 🔸 'check_position_limits'
+│   │  │      ├── 🔸 'get_allowed_instruments'
+│   │  │      ├── 🔸 'validate_trade_compliance'
+│   │  │      ├── 🔸 'generate_governance_report'
+│   │  │      ╰── 🔸 'get_governance_policies'
+│   │  ├── 🔹 validate_trade_complianc
+│   │  ├── 🔹 generate_governance_report
+│   │  ├── 🔹 get_governance_policies
+│   │  ├── 🔹 initialize_governance_system
+│   │  ╰── 🔹 check_governance_health
+│   │ 
+│   ├── audit_logger.py    📝      # FINRA compliance
+│   │  ╰── 🔷 class AuditLogger
+│   │         ├── 🔹 __init__
+│   │         ╰── 🔹 log_event
+│   │ 
+│   ╰── ethics_engine.py    ⚖️    # Trading constraints
+│       ├── 🔷 class EthicsViolation
+│       ├── 🔷 class ConstraintType
+│       ╰── 🔷 class EthicsEngine
+│               ├── 🔹 __init__
+│               ├── 🔹 _load_blacklist
+│               ├── 🔹 _load_sector_limits
+│               ├── 🔹 _load_trading_hours
+│               ├── 🔹 validate_order
+│               ├── 🔹 check_blacklist
+│               ├── 🔹 check_trading_hours
+│               ├── 🔹 check_position_limit
+│               ├── 🔹 check_sector_exposure
+│               ├── 🔹 check_order_size
+│               ╰── 🔹 _get_sector
+│
+├──  dependencies/  📦  INFRA    (No __init__ needed - infra)
+│   ├── requirements.txt     📜   
+│   ╰── docker/    🐳            # Containerization
+│       ├── Dockerfile.api  📜 
+│       ╰── docker-compose.yml   📜
+│           ╰── 🔸 services
+│                  ├── 🔸 nats
+│                  ╰── 🔸 kafka
+│
+├── config/  🗄️   (No __init__ needed - config)
+│   ├── main_config.yaml   ⚙️  
+│   │   ├── 🔸 ib_gateway
+│   │   ├── 🔸 data_systems
+│   │   ├── 🔸 brokers
+│   │   ├── 🔸 exotic_pricing
+│   │   ├── 🔸 execution
+│   │   ├── 🔸 risk
+│   │   ├── 🔸 logging
+│   │   ├── 🔸 market
+│   │   ├── 🔸 strategies
+│   │   ├── 🔸 strategy_mixing
+│   │   ├── 🔸 ai
+│   │   ├── 🔸 rl
+│   │   ├── 🔸 visualization
+│   │   ├── 🔸 storage
+│   │   ├── 🔸 constraints
+│   │   ├── 🔸 monitoring
+│   │   ├── 🔸 strategy_id
+│   │   ├── 🔸 historical
+│   │   ├── 🔸 nats
+│   │   ╰── 🔸 migration
+│   │ 
+│   ├── secrets.vault   🔑       # AWS KMS encrypted
+│   └── environment/   🎛️
+│       ├── dev.yaml   📜
+│       └── prod.yaml   📜
+│
+├── tws # →  This is the actual package directory 
+│   ├── .install4j 📁 →
+│   ├── charts/ 📁 →
+│   ├── data/ 📁 → 
+│   ├── healkfkfkfln......// 📁 → 
+│   ├── jars/ 📁 → 
+│   ├── jts.ini → 
+│   ├── launcher.log → 
+│   ├── tws.exe → 
+│   ├── tws.vmoptions → 
+│   ├── uninstall.exe →  
+│   ╰── xmlopt.dat → 
+│     
+├──  README.cmd
+│
+├── start.py
+│
+│
+│
+│
+│
+
+Key Explanation:
+
+🔴 LIVE Trading Scripts (Red)
+
+    quantum_trader.py - Core decision engine
+
+    execution_engine.py - Order management
+
+    data_router.py - Market data distribution
+
+    cognitive_layer.py - Real-time adaptation
+
+    market_data.py - Live feed processing
+
+🔵 HELPER Scripts (Blue)
+
+    service_monitor.py - System watchdog
+
+    validation_suite.py - Model testing
+
+    drift_monitor.py - AI health checks
+
+    strategy_assembler.py - GUI configurator
+
+    backtest_builder.py - Scenario designer
+
+
+
+
+
+
+
+
+
+
+
+
+
+Symbol Legend:
+
+    🟢-🚀 = Primary execution script (Trader, part of primary script)
+
+    🟢 Green circle = Constantly runing, live script
+
+    🔵 Blue circle = General Python scripts in silent mode (supporting/secondary scripts, helpers)
+    
+    🔷 = Core classes (config/trading/risk)
+
+    🔹 = Functions
+    
+    🔸 = Message, info passing through
+
+    🧠 = Brain ( Symbolizes smart scripts, maybe AI logic, signal processors )
+
+    🚦 = Filter/guard systems (Veto/News, part of primary script)
+
+    🛠️ = Builder tools (File uses 🛠️ for adjustable parameters)
+    
+    📦 = Installitation package list
+
+    💾 = Serialized AI assets
+
+    ⚙️ = Configuration files
+
+    📊 Visual Dashboard = Live prediction/indicator charting via Dash ( or FastAPI + WebSockets )
+
+    🔁 Backtesting module = Use your existing data fetcher + indicator engine to simulate performance
+    
+    🧪 = Test run
+
+    ⚠️ 💰 ⚠️ = Accessing account funds
+
+    ✅ G O ✅ = Passes all operational checks (production-ready)
+    
+    ✔️ DONE
+
+    ⚠️ WARNING ⚠️ = Critical failure state (blocks execution)
+
+    ⚠️ ATTENTION ⚠️ = Functional but needs optimization
+
+    ❗❗❗ 🛑  S T O P  🛑 ❗❗❗  = Folders or files not working    
+
+Jts
+│
+├── tws # →  This is the actual package directory 
+│   ├── .install4j 📁 →
+│   ├── charts/ 📁 →
+│   ├── data/ 📁 → 
+│   ├── healkfkfkfln......// 📁 → 
+│   ├── jars/ 📁 → 
+│   ├── jts.ini → 
+│   ├── launcher.log → 
+│   ├── tws.exe → 
+│   ├── tws.vmoptions → 
+│   ├── uninstall.exe →  
+│   ╰── xmlopt.dat → 
+│       
+       
