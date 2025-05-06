@@ -20,7 +20,9 @@ Summary:
 
 
 
-IB_AI_Options_Trading_Pro/
+
+
+OptionsIB
 │
 ├── AI_MODELS/ 🧠   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
 │   ├── feature_engineering/ 🔍  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
@@ -992,6 +994,27 @@ IB_AI_Options_Trading_Pro/
 │       ├── 🔹 _prepare_dashboard_data
 │       ╰── 🔹 ginitialize_performance_monitoring
 │
+├── quantum
+│   ├── __init__.py     # Package marker
+│   │   ╰── __all__
+│   │      ├── 🔸 'create_custom_dashboard'
+│   │      ├── 🔸 'DASHBOARD_TEMPLATES'
+│   │      ├── 🔸 'analyze_portfolio'
+│   │      ╰── 🔸 'get_performance_tools'
+│   │  
+│   ├── q_portfolio.py
+│   │   ├── 🔷 class QuantumPortfolioOptimizer
+│   │   │   ├── 🔹 __init__
+│   │   │   ╰── 🔹 optimaze
+│   │   ╰── 🔹 optimize_quantum_portfolio
+│   ╰── q_risk.py
+│       ├── 🔷 class QuantumRiskAnalyzer
+│       │   ├── 🔹 __init__
+│       │   ╰── 🔹 calculate_var
+│       ╰── 🔹 calculate_var
+│      
+│
+
 ├── ⚖️ RISK_SYSTEM/  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
 │   ├── 🛡️ armor/
 │   │   ├── __init__.py      Armor submodule
@@ -1244,61 +1267,16 @@ IB_AI_Options_Trading_Pro/
 │   ├── uninstall.exe →  
 │   ╰── xmlopt.dat → 
 │
+├── __init__.py
+│
 ├── family_tree.txt   
 │
 ├──  README.cmd
 │
 ├── start.py
-
-
-Key Explanation:
-
-🟢 LIVE Trading Scripts (green)
-
-   
-
-🔵 HELPER Scripts (Blue)
-
-
-
-Symbol Legend:
-
-    
-
-    🟢 Green circle = Constantly runing, live script
-
-    🔵 Blue circle = General Python scripts in silent mode (supporting/secondary scripts, helpers)
-    
-    🔷 = Core classes (config/trading/risk)
-
-    🔹 = Functions
-    
-    🔸 = Message, info passing through
-
-    🧠 = Brain ( Symbolizes smart scripts, maybe AI logic, signal processors )
-
-    🚦 = Filter/guard systems (Veto/News, part of primary script)
-
-    🛠️ = Builder tools (File uses 🛠️ for adjustable parameters)
-    
-    📦 = Installitation package list
-
-    💾 = Serialized AI assets
-
-    ⚙️ = Configuration files
-
-    📊 Visual Dashboard = Live prediction/indicator charting via Dash ( or FastAPI + WebSockets )
-
-    🔁 Backtesting module = Use your existing data fetcher + indicator engine to simulate performance
-    
-    🧪 = Test run
-
-    ⚠️ 💰 ⚠️ = Accessing account funds
-
-    ✅ G O ✅ = Passes all operational checks (production-ready)
-
-    ⚠️ WARNING ⚠️ = Critical failure state (blocks execution)
-
-    ⚠️ ATTENTION ⚠️ = Functional but needs optimization
-
-    ❗❗❗ 🛑  S T O P  🛑 ❗❗❗  = Folders or files not working    
+│   ├── main → 
+│   ├── preflight_checks →  
+│   ╰── __name__ == "__main__" → 
+│
+│
+│  
