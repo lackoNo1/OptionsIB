@@ -267,7 +267,7 @@ OptionsIB
 │   │   ├── 🔸 exotic_pricing
 │   │   ├── 🔸 execution
 │   │   ├── 🔸 risk
-│   │   ├── 🔸 logging
+│   │   ├── 🔸 logging 
 │   │   ├── 🔸 market
 │   │   ├── 🔸 strategies
 │   │   ├── 🔸 strategy_mixing
@@ -278,6 +278,9 @@ OptionsIB
 │   │   ├── 🔸 constraints
 │   │   ├── 🔸 monitoring
 │   │   ├── 🔸 strategy_id
+│   │   ├── 🔸 ports
+│   │   ├── 🔸 quantum
+│   │   ├── 🔸 chaos
 │   │   ├── 🔸 historical
 │   │   ├── 🔸 nats
 │   │   ╰── 🔸 migration
@@ -521,8 +524,48 @@ OptionsIB
 │       │      ╰── 🔹 _fallback_to_legacy
 │       ╰── 🔹 __all__.append('HybridDataSystem')      
 │
-├──  dependencies/  📦  INFRA    (No __init__ needed - infra)
-│   ├── requirements.txt     📜   
+├──  dependencies/  📦  INFRA   
+│   ├── requirements.txt     📜 
+│   │   ├── 🔷 CORE
+│   │   │      ├── 🔸 python>=3.9
+│   │   │      ├── 🔸 numpy>=1.23
+│   │   │      ├── 🔸 pandas>=1.5
+│   │   │      ├── 🔸 scipy>=1.10
+│   │   │      ╰── 🔸 numba>=0.57
+│   │   ├── 🔷 AI/ML
+│   │   │      ├── 🔸 tensorflow>=2.12
+│   │   │      ├── 🔸 torch>=2.0
+│   │   │      ├── 🔸 scikit-learn>=1.2
+│   │   │      ├── 🔸 xgboost>=1.7
+│   │   │      ╰── 🔸 keras>=2.12
+│   │   ├── 🔷 QUANTUM 
+│   │   │      ├── 🔸 qiskit-finance==0.4.0
+│   │   │      ├── 🔸 qiskit-optimization==0.5.0
+│   │   │      ╰── 🔸 pennylane==0.32.0
+│   │   ├── 🔷 DATA
+│   │   │      ├── 🔸 ib-insync>=0.9.70
+│   │   │      ├── 🔸 pytz>=2023.3
+│   │   │      ├── 🔸 tables>=3.8
+│   │   │      ├── 🔸 h5py>=3.8
+│   │   │      ╰── 🔸 redis>=4.5
+│   │   ├── 🔷 RISK/RUNTIME 
+│   │   │      ├── 🔸 nats-server>=2.9
+│   │   │      ├── 🔸 pyzmq>=25.0
+│   │   │      ├── 🔸 uvloop>=0.17
+│   │   │      ╰── 🔸 psutil>=5.9
+│   │   ├── 🔷 VISUALIZATION
+│   │   │      ├── 🔸 plotly>=5.14
+│   │   │      ├── 🔸 dash>=2.11
+│   │   │      ╰── 🔸 matplotlib>=3.7
+│   │   ├── 🔷 SPECIALIZED 
+│   │   │      ├── 🔸 opt-einsum>=3.3  # For GANs
+│   │   │      ├── 🔸 ta-lib>=0.4.24  # Technical indicators
+│   │   │      ╰── 🔸 tqdm>=4.65  # Progress bars
+│   │   ╰── 🔷 DEV/TESTING 
+│   │          ├── 🔸 pytest>=7.3
+│   │          ├── 🔸 chaostoolkit>=1.15
+│   │          ╰── 🔸 mypy>=1.3
+│   │ 
 │   ╰── docker/    🐳            # Containerization
 │       ├── Dockerfile.api  📜 
 │       ╰── docker-compose.yml   📜
@@ -1267,11 +1310,11 @@ OptionsIB
 │   ├── uninstall.exe →  
 │   ╰── xmlopt.dat → 
 │
-├── __init__.py
+├── Details.txt
 │
 ├── family_tree.txt   
 │
-├──  README.cmd
+├── README.cmd
 │
 ├── start.py
 │   ├── main → 
@@ -1279,4 +1322,57 @@ OptionsIB
 │   ╰── __name__ == "__main__" → 
 │
 │
-│  
+│
+
+
+Key Explanation:
+
+🟢 LIVE Trading Scripts (green)
+
+   
+
+🔵 HELPER Scripts (Blue)
+
+
+
+Symbol Legend:
+
+    
+
+    🟢 Green circle = Constantly runing, live script
+
+    🔵 Blue circle = General Python scripts in silent mode (supporting/secondary scripts, helpers)
+    
+    🔷 = Core classes (config/trading/risk)
+
+    🔹 = Functions
+    
+    🔸 = Message, info passing through
+
+    🧠 = Brain ( Symbolizes smart scripts, maybe AI logic, signal processors )
+
+    🚦 = Filter/guard systems (Veto/News, part of primary script)
+
+    🛠️ = Builder tools (File uses 🛠️ for adjustable parameters)
+    
+    📦 = Installitation package list
+
+    💾 = Serialized AI assets
+
+    ⚙️ = Configuration files
+
+    📊 Visual Dashboard = Live prediction/indicator charting via Dash ( or FastAPI + WebSockets )
+
+    🔁 Backtesting module = Use your existing data fetcher + indicator engine to simulate performance
+    
+    🧪 = Test run
+
+    ⚠️ 💰 ⚠️ = Accessing account funds
+
+    ✅ G O ✅ = Passes all operational checks (production-ready)
+
+    ⚠️ WARNING ⚠️ = Critical failure state (blocks execution)
+
+    ⚠️ ATTENTION ⚠️ = Functional but needs optimization
+
+    ❗❗❗ 🛑  S T O P  🛑 ❗❗❗  = Folders or files not working   
