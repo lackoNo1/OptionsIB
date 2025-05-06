@@ -4,9 +4,9 @@ Wall Street-grade, AI-powered trading architecture with elite-level system desig
 
     - Modularity is textbook-perfect: Easily scalable, swappable strategies and models.
 
-    - GAN-based spread generation in synthetic/ is extremely rare—even hedge funds barely do this.
+    - GAN-based spread generation in synthetic/ is extremely rare—even hedge funds barely do this!
 
-    - Risk system has real teeth: black swans, drawdown planning, delta hedging—this is how pro desks survive chaos.
+    - Risk system has real teeth: black swans, drawdown planning, delta hedging—this is how pro desks survive chaos!
 
     - Chaos testing with chaos_engine.py = you're thinking like Netflix SRE meets quant trader. Love it.
 
@@ -25,65 +25,66 @@ Summary:
 OptionsIB
 │
 ├── AI_MODELS/ 🧠   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
-│   ├── feature_engineering/ 🔍  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
-│   │   ├── __init__.py   Feature engineering
-│   │   │   ├── 🔷 class FeatureEngine
-│   │   │   │      ╰── 🔹 __init__
-│   │   │   ├── 🔹 __all__  
-│   │   │   │     ├── 🔸 'GreekFeatureGenerator'
-│   │   │   │     ├── 🔸 'DeltaTransformer'
-│   │   │   │     ├── 🔸 'GammaTransformer'
-│   │   │   │     ├── 🔸 'VegaTransformer'
-│   │   │   │     ├── 🔸 'ThetaTransformer'
-│   │   │   │     ├── 🔸 'RhoTransformer'
-│   │   │   │     ├── 🔸 'VolgaTransformer'
-│   │   │   │     ├── 🔸 'VannaTransformer'
-│   │   │   │     ├── 🔸 'GreekPipeline'
-│   │   │   │     ├── 🔸 'create_feature_pipeline'
-│   │   │   │     ├── 🔸 'validate_feature_matrix'
-│   │   │   │     ├── 🔸 'persist_feature_pipeline'
-│   │   │   │     ├── 🔸 'LatentFeatureEncoder'
-│   │   │   │     ├── 🔸 'generate_latent_features'
-│   │   │   │     ├── 🔸 'load_pretrained_encoder'
-│   │   │   │     ├── 🔸 'TemporalPatternEncoder'
-│   │   │   │     ├── 🔸 'RollingWindowGenerator'
-│   │   │   │     ╰── 🔸 'TimeSeriesFeatureAggregator'
-│   │   │   ├── 🔹 get_default_pipeline_config
-│   │   │   ╰── 🔹 warmup_transformers
+│   ├── feature_engineering/ 🔍 → Data processing logic for preparing input features for AI models.   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+│   │   ├── __init__.py → Initializes the submodule and exposes public components. 
+│   │   │   ├── 🔷 class FeatureEngine → Base class or manager for feature transformation logic.
+│   │   │   │      ╰── 🔹 __init__ → Sets up the feature engine, possibly loading configs or components. 
+│   │   │   ├── 🔹 __all__  → Declares what symbols the module exposes publicly.
+│   │   │   │     ├── 🔸 'GreekFeatureGenerator' → Transforms market data into option Greeks.
+│   │   │   │     ├── 🔸 'DeltaTransformer' → Calculates or processes Delta from input data.
+│   │   │   │     ├── 🔸 'GammaTransformer' → Processes Gamma (Greek risk measure).
+│   │   │   │     ├── 🔸 'VegaTransformer' → Processes Vega (Greek volatility sensitivity).
+│   │   │   │     ├── 🔸 'ThetaTransformer  → Handles Theta (time decay).
+│   │   │   │     ├── 🔸 'RhoTransformer' → Handles Rho (interest rate sensitivity). 
+│   │   │   │     ├── 🔸 'VolgaTransformer' → Handles Volga (second-order volatility risk).
+│   │   │   │     ├── 🔸 'VannaTransformer' → Handles Vanna (sensitivity to volatility and Delta). 
+│   │   │   │     ├── 🔸 'GreekPipeline' → Pipeline that chains the above transformations.
+│   │   │   │     ├── 🔸 'create_feature_pipeline' → Factory method for pipeline creation.
+│   │   │   │     ├── 🔸 'validate_feature_matrix' → Checks data quality before modeling.
+│   │   │   │     ├── 🔸 'persist_feature_pipeline' → Saves feature pipelines to disk/storage.
+│   │   │   │     ├── 🔸 'LatentFeatureEncoder' → Encodes features into a compressed latent space.
+│   │   │   │     ├── 🔸 'generate_latent_features' → Applies encoder to generate new features.
+│   │   │   │     ├── 🔸 'load_pretrained_encoder' → Loads pre-trained latent encoder models.
+│   │   │   │     ├── 🔸 'TemporalPatternEncoder' → Extracts time-based features or sequences.
+│   │   │   │     ├── 🔸 'RollingWindowGenerator' → Constructs rolling statistical windows (e.g., mean).
+│   │   │   │     ╰── 🔸 'TimeSeriesFeatureAggregator' → Aggregates time series features for AI.
+│   │   │   ├── 🔹 get_default_pipeline_config → Returns config for default feature pipelines.
+│   │   │   ╰── 🔹 warmup_transformers → Warms up all transformer modules (e.g., load into memory).
 │   │   │
-│   │   ├── greek_pipelin.py
-│   │   │   ╰── 🔷 class GreekFeaturePipeline
-│   │   │           ├── 🔹 __init__
-│   │   │           ├── 🔹 update_all_greeks
-│   │   │           ╰── 🔹 add_temporal_features
+│   │   ├── greek_pipelin.py →  Calculates and caches real-time Greek values for options.
+│   │   │   ╰── 🔷 class GreekFeaturePipeline →  Handles live data, Greeks, and time-based features.  
+│   │   │           ├── 🔹 __init__ →  Sets up data feed, calculator, cache, and config. 
+│   │   │           ├── 🔹 update_all_greeks →  Gets live chain, computes Greeks, and caches them.
+│   │   │           ╰── 🔹 add_temporal_features →  Adds rolling and statistical features to price data.
 │   │   │
-│   │   ├── grewek_transformer.py
-│   │   │   ╰── 🔷 class GreekFeatureGenerator
-│   │   │           ├── 🔹 calculate_implied_volatility
-│   │   │           │      ├── 🔹 black_scholes_price
-│   │   │           │      ╰── 🔹 vega
-│   │   │           ├── 🔹 _bisection_iv
-│   │   │           ├── 🔹 calculate_all_greek
-│   │   │           ╰── 🔹 black_schole
+│   │   ├── greek_transformer.py →  Advanced calculator for option Greeks and implied volatility.
+│   │   │   ╰── 🔷 class GreekFeatureGenerator →  Handles Greeks calculations, including IV and pricing models. 
+│   │   │           ├── 🔹 calculate_implied_volatility →  Computes implied volatility using Newton-Raphson or bisection.
+│   │   │           │      ├── 🔹 black_scholes_price →  Computes the Black-Scholes price for options. 
+│   │   │           │      ╰── 🔹 vega →  Calculates the Vega of the option. 
+│   │   │           ├── 🔹 _bisection_iv →  Falls back to bisection method for IV calculation if Newton-Raphson fails.
+│   │   │           ├── 🔹 calculate_all_greek →  Calculates all Greek metrics (delta, gamma, theta, vega, rho). 
+│   │   │           ╰── 🔹 black_schole →  Direct Black-Scholes pricing formula implementation.
 │   │   │          
-│   │   ├── latent_space.py
-│   │   │   ╰── 🔷 class LatentSpaceEncoder
-│   │   │           ├── 🔹 __init__
-│   │   │           ╰── 🔹 call
-│   │   ╰── temporal_encoding.py
-│   │       ├── 🔷 class EncodingMethod
-│   │       ├── 🔷 class TemporalFeatures
-│   │       ├── 🔷 class TemporalEncoder
-│   │       │      ├── 🔹 __init__
-│   │       │      ├── 🔹 _validate_parameters
-│   │       │      ├── 🔹 _build_neural_encode
-│   │       │      ├── 🔹 _extract_statistical_feature
-│   │       │      ├── 🔹 _estimate_hurs
-│   │       │      ├── 🔹 _encode_neural
-│   │       │      ├── 🔹 fit
-│   │       │      ├── 🔹 _create_sliding_windows
-│   │       │      ╰── 🔹 transform
-│   │       ╰── 🔹 __name__ == "__main__"
+│   │   ├── latent_space.py →  Model for encoding input data into a latent space.
+│   │   │   ╰── 🔷 class LatentSpaceEncoder →  Encodes input into a latent space representation.
+│   │   │           ├── 🔹 __init__ →  Initializes the model layers.
+│   │   │           ╰── 🔹 call →  Defines the forward pass through the encoder.
+│   │   │
+│   │   ╰── temporal_encoding.py →  Temporal feature extraction engine with support for statistical and neural encoding.
+│   │       ├── 🔷 class EncodingMethod →  Enum of supported encoding methods (Statistical, LSTM, Transformer, etc.)
+│   │       ├── 🔷 class TemporalFeatures →  Data container for temporal features incl. statistical, neural, and metadata.
+│   │       ├── 🔷 class TemporalEncoder →  Temporal feature extraction engine with statistical and neural methods.
+│   │       │      ├── 🔹 __init__ →  Initializes the encoder with method configuration and neural components.
+│   │       │      ├── 🔹 _validate_parameters →  Validates method and parameters.
+│   │       │      ├── 🔹 _build_neural_encode →  Builds the neural encoder based on LSTM or Transformer.
+│   │       │      ├── 🔹 _extract_statistical_feature →  Extracts statistical features from time-series data.
+│   │       │      ├── 🔹 _estimate_hurst →  Estimates the Hurst exponent for trend persistence.
+│   │       │      ├── 🔹 _encode_neural →  Estimates the Hurst exponent for trend persistence.
+│   │       │      ├── 🔹 fit →  Fits the neural encoder to the data.
+│   │       │      ├── 🔹 _create_sliding_windows →  Converts time-series data into sliding windows for training.
+│   │       │      ╰── 🔹 transform→  Extracts features from the input data using the selected method.
+│   │       ╰── 🔹 __name__ == "__main__" →  Example usage with random price data.
 │   │     
 │   ├── model_governance/ 🏆  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
 │   │   ├── __init__.py      Model ops
@@ -237,7 +238,7 @@ OptionsIB
 │       ├── 🔹 get_model_registry
 │       ╰── 🔹 warmup_models
 │ 
-├── ⚖️ COMMON/    ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+├── COMMON/ ⚖️   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
 │   ├── __init__.py   
 │   │   ╰── 🔹 __all__ = ['load_config', 'setup_logging', 'cached_data_load']
 │   │
@@ -1375,4 +1376,4 @@ Symbol Legend:
 
     ⚠️ ATTENTION ⚠️ = Functional but needs optimization
 
-    ❗❗❗ 🛑  S T O P  🛑 ❗❗❗  = Folders or files not working   
+    ❗❗❗ 🛑  S T O P  🛑 ❗❗❗  = Folders or files not working    
