@@ -1,0 +1,102 @@
+Communication:
+📜 Script-to-Protocol Master List
+
+(✅ = Live on VPS | 🔄 = Internal)
+
+🚀 LAUNCHERS/
+Script Protocol Purpose Port/Topic
+✅ system_launcher.py ZeroMQ Orchestrate system components tcp://*:5555 (REP)
+🔄 strategy_loader.py gRPC Inject strategies to core grpc://:50051
+✅ service_monitor.py HTTP/2 Health checks + metrics https://:8080
+🔄 restart_controller.py ZeroMQ Crash recovery signals tcp://*:5556 (PUB)
+
+🟢 CORE_ENGINE/
+Script Protocol Purpose Port/Topic
+✅ quantum_trader.py NATS Receive market data nats://marketdata.>
+✅ execution_engine.py gRPC Execute orders (TLS) grpc://:50052
+🔄 cognitive_layer.py ZeroMQ Send regime signals tcp://*:5557 (PUSH)
+✅ data_router.py NATS Distribute processed data nats://processed.>
+
+🌐 DATA_SYSTEMS/
+Script Protocol Purpose Port/Topic
+✅ market_data.py NATS Stream raw TWS data nats://tws.raw
+✅ news_ingestor.py Kafka Publish news events kafka://news.events
+🔄 processor.py gRPC Historical data queries grpc://:50053
+
+🧠 AI_MODELS/
+Script Protocol Purpose Port/Topic
+✅ ensemble_learner.py NATS Subscribe to market data nats://marketdata.>
+🔄 policy_network.py ZeroMQ Receive RL signals tcp://*:5558 (PULL)
+⚖️ RISK_SYSTEM/
+Script Protocol Purpose Port/Topic
+✅ risk_engine.py gRPC Real-time risk checks grpc://:50054
+✅ circuit_breaker.py ZeroMQ Emergency halt broadcast tcp://*:5559 (PUB)
+📊
+
+📊 PERFORMANCE/
+Script Protocol Purpose Port/Topic
+✅ live_dashboard.py WebSocket Browser UI updates wss://:8081
+🔄 trade_replayer.py Kafka Consume execution history kafka://executions
+🌐 VPS Deployment List
+
+*(Must run 24/7 with monitoring)*
+
+NATS Server
+
+Host: nats.prod.yourvps.net:4222
+
+TLS: Enabled (LetsEncrypt wildcard)
+
+Kafka Cluster
+
+Brokers: kafka1-3.prod.yourvps.net:9092
+
+Auth: SASL/SCRAM
+
+Core Services
+bash
+
+# Always-on processes
+system_launcher.py # Supervisor monitored
+quantum_trader.py # 4x CPU cores
+execution_engine.py # GPU-enabled
+risk_engine.py # 2x CPU cores
+market_data.py # Dedicated NIC
+
+Infrastructure
+yaml
+
+# cloud-init for VPS
+
+packages:
+- nats-server
+- kafka
+- prometheus-node-exporter
+firewall:
+allow: [4222, 9092, 50051-50054, 8080-8081]
+
+🔒 Security Matrix
+Protocol Encryption Authentication Recommended For
+gRPC TLS 1.3 mTLS + client certs Order execution
+NATS TLS 1.3 + JWT NKeys Market data
+Kafka SASL_SSL + AES-256 SCRAM-SHA-512 Audit trails
+ZeroMQ CurveZMQ ZAP (ZeroMQ Auth) Control messages
+Implementation Checklist
+
+Phase 1 (VPS)
+
+Deploy NATS/Kafka
+
+Launch system_launcher.py + market_data.py
+
+Phase 2
+
+Enable gRPC TLS for execution_engine.py
+
+Configure NATS JetStream for data_router.py
+
+Phase 3
+
+Kafka topics for PERFORMANCE/
+
+ZeroMQ auth for LAUNCHERS/
