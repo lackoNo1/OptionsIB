@@ -26,17 +26,18 @@ Wall Street-grade, J.P. Morgan-Compliant, AI-powered trading architecture with e
     - Capital protection is engineered at the infrastructure level via:
 
     "The Vault" (Blockchain-Powered Safety):
+        (its implementation has not yet started as of 09.05.2024)
 
         🔸 Traders/investors deposit funds into personalized Solana smart contracts—not IB or traditional banks.
 
-        🔸 Funds are never stored on IB; "The Vault" holds all capital, with USDT released via smart contract for trades (executed in 100ms via atomic swaps).
+        🔸 Funds are never stored on IB; "The Vault" holds all capital, with USDT released via smart contract for trades                 (executed in 100ms via atomic swaps).
 
         🔸 Zero counterparty risk: Profits return to the smart contract instantly upon trade closure.
 
         🔸 Unhackable vs. traditional banks: No "few clicks to steal" backdoors — just cryptographically enforced security.
 
         🔸 By leveraging Solana smart contracts for atomic settlement, 
-        the system ensures funds never reside on exchange servers, with USDT released only for confirmed trades (executed in 100ms). 
+        the system ensures funds never reside on exchange servers, with USDT released only for confirmed trades.
 
         🔸 This creates an unhackable capital barrier far beyond conventional bank security.
 
