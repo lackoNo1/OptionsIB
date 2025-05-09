@@ -73,7 +73,6 @@ This isn't just a trading system — it's a next-generation alpha factory with b
 
 Project family tree: 
 
-
 OptionsIB
 │
 ├── AI_MODELS/ 🧠   ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
@@ -82,94 +81,94 @@ OptionsIB
 │   │   │   ├── 🔷 class FeatureEngine → Base class or manager for feature transformation logic.
 │   │   │   │      ╰── 🔹 __init__ → Sets up the feature engine, possibly loading configs or components. 
 │   │   │   ├── 🔹 __all__  → Declares what symbols the module exposes publicly.
-│   │   │   │     ├── 🔸 'GreekFeatureGenerator' → Transforms market data into option Greeks.
-│   │   │   │     ├── 🔸 'DeltaTransformer' → Calculates or processes Delta from input data.
-│   │   │   │     ├── 🔸 'GammaTransformer' → Processes Gamma (Greek risk measure).
-│   │   │   │     ├── 🔸 'VegaTransformer' → Processes Vega (Greek volatility sensitivity).
-│   │   │   │     ├── 🔸 'ThetaTransformer  → Handles Theta (time decay).
-│   │   │   │     ├── 🔸 'RhoTransformer' → Handles Rho (interest rate sensitivity). 
-│   │   │   │     ├── 🔸 'VolgaTransformer' → Handles Volga (second-order volatility risk).
-│   │   │   │     ├── 🔸 'VannaTransformer' → Handles Vanna (sensitivity to volatility and Delta). 
-│   │   │   │     ├── 🔸 'GreekPipeline' → Pipeline that chains the above transformations.
-│   │   │   │     ├── 🔸 'create_feature_pipeline' → Factory method for pipeline creation.
-│   │   │   │     ├── 🔸 'validate_feature_matrix' → Checks data quality before modeling.
-│   │   │   │     ├── 🔸 'persist_feature_pipeline' → Saves feature pipelines to disk/storage.
-│   │   │   │     ├── 🔸 'LatentFeatureEncoder' → Encodes features into a compressed latent space.
-│   │   │   │     ├── 🔸 'generate_latent_features' → Applies encoder to generate new features.
-│   │   │   │     ├── 🔸 'load_pretrained_encoder' → Loads pre-trained latent encoder models.
-│   │   │   │     ├── 🔸 'TemporalPatternEncoder' → Extracts time-based features or sequences.
-│   │   │   │     ├── 🔸 'RollingWindowGenerator' → Constructs rolling statistical windows (e.g., mean).
-│   │   │   │     ╰── 🔸 'TimeSeriesFeatureAggregator' → Aggregates time series features for AI.
-│   │   │   ├── 🔹 get_default_pipeline_config → Returns config for default feature pipelines.
-│   │   │   ╰── 🔹 warmup_transformers → Warms up all transformer modules (e.g., load into memory).
+│   │   │   │     ├── 🔸 'GreekFeatureGenerator'
+│   │   │   │     ├── 🔸 'DeltaTransformer' 
+│   │   │   │     ├── 🔸 'GammaTransformer' 
+│   │   │   │     ├── 🔸 'VegaTransformer'
+│   │   │   │     ├── 🔸 'ThetaTransformer 
+│   │   │   │     ├── 🔸 'RhoTransformer'  
+│   │   │   │     ├── 🔸 'VolgaTransformer'
+│   │   │   │     ├── 🔸 'VannaTransformer' 
+│   │   │   │     ├── 🔸 'GreekPipeline' 
+│   │   │   │     ├── 🔸 'create_feature_pipeline' 
+│   │   │   │     ├── 🔸 'validate_feature_matrix' 
+│   │   │   │     ├── 🔸 'persist_feature_pipeline'
+│   │   │   │     ├── 🔸 'LatentFeatureEncoder'
+│   │   │   │     ├── 🔸 'generate_latent_features' 
+│   │   │   │     ├── 🔸 'load_pretrained_encoder' .
+│   │   │   │     ├── 🔸 'TemporalPatternEncoder' 
+│   │   │   │     ├── 🔸 'RollingWindowGenerator'
+│   │   │   │     ╰── 🔸 'TimeSeriesFeatureAggregator' 
+│   │   │   ├── 🔹 get_default_pipeline_config 
+│   │   │   ╰── 🔹 warmup_transformers .
 │   │   │
-│   │   ├── greek_pipelin.py →  Calculates and caches real-time Greek values for options.
+│   │   ├── greek_pipeline.py →  Calculates and caches real-time Greek values for options.
 │   │   │   ╰── 🔷 class GreekFeaturePipeline →  Handles live data, Greeks, and time-based features.  
-│   │   │           ├── 🔹 __init__ →  Sets up data feed, calculator, cache, and config. 
-│   │   │           ├── 🔹 update_all_greeks →  Gets live chain, computes Greeks, and caches them.
-│   │   │           ╰── 🔹 add_temporal_features →  Adds rolling and statistical features to price data.
+│   │   │           ├── 🔹 __init__ 
+│   │   │           ├── 🔹 update_all_greeks
+│   │   │           ╰── 🔹 add_temporal_features 
 │   │   │
 │   │   ├── greek_transformer.py →  Advanced calculator for option Greeks and implied volatility.
 │   │   │   ╰── 🔷 class GreekFeatureGenerator →  Handles Greeks calculations, including IV and pricing models. 
-│   │   │           ├── 🔹 calculate_implied_volatility →  Computes implied volatility using Newton-Raphson or bisection.
-│   │   │           │      ├── 🔹 black_scholes_price →  Computes the Black-Scholes price for options. 
-│   │   │           │      ╰── 🔹 vega →  Calculates the Vega of the option. 
-│   │   │           ├── 🔹 _bisection_iv →  Falls back to bisection method for IV calculation if Newton-Raphson fails.
-│   │   │           ├── 🔹 calculate_all_greek →  Calculates all Greek metrics (delta, gamma, theta, vega, rho). 
-│   │   │           ╰── 🔹 black_schole →  Direct Black-Scholes pricing formula implementation.
+│   │   │           ├── 🔹 calculate_implied_volatility 
+│   │   │           │      ├── 🔹 black_scholes_price
+│   │   │           │      ╰── 🔹 vega  
+│   │   │           ├── 🔹 _bisection_iv
+│   │   │           ├── 🔹 calculate_all_greek 
+│   │   │           ╰── 🔹 black_schole 
 │   │   │          
 │   │   ├── latent_space.py →  Model for encoding input data into a latent space.
-│   │   │   ╰── 🔷 class LatentSpaceEncoder →  Encodes input into a latent space representation.
-│   │   │           ├── 🔹 __init__ →  Initializes the model layers.
-│   │   │           ╰── 🔹 call →  Defines the forward pass through the encoder.
+│   │   │   ╰── 🔷 class LatentSpaceEncoder
+│   │   │           ├── 🔹 __init__ →
+│   │   │           ╰── 🔹 call 
 │   │   │
-│   │   ╰── temporal_encoding.py →  Temporal feature extraction engine with support for statistical and neural encoding.
-│   │       ├── 🔷 class EncodingMethod →  Elite encoding techniques (Regime-Adaptive/Hybrid/LSTM/Transformer).
-│   │       ├── 🔷 class RegimeMetrics → Real-time market state diagnostics (volatility/trend/liquidity/panic).
-│   │       ├── 🔷 class TemporalFeatures →  Institutional feature container with AI embeddings & regime intelligence.
-│   │       ├── 🔷 class class QuantumNormalizer → Quantum-secured feature scaling with noise profiling.
-│   │       │      ├── 🔹 __init__ → REDACTED - Proprietary
-│   │       │      ├── 🔹 fit → Learns asset-specific noise distribution.
-│   │       │      ╰── 🔹 transform → Applies quantum-aware normalization.
+│   │   ╰── temporal_encoding.py 
+│   │       ├── 🔷 class EncodingMethod 
+│   │       ├── 🔷 class RegimeMetrics
+│   │       ├── 🔷 class TemporalFeatures 
+│   │       ├── 🔷 class class QuantumNormalizer 
+│   │       │      ├── 🔹 __init__ 
+│   │       │      ├── 🔹 fit 
+│   │       │      ╰── 🔹 transform 
 │   │       ├── 🔷 class TemporalEncoder →  Hedge fund-grade feature extractor
-│   │       │      ├── 🔹 __init__ →  Initializes the encoder with method configuration and neural components.
-│   │       │      ├── 🔹 _validate_parameters →  Validates method and parameters.
-│   │       │      ├── 🔹 _build_neural_encode →  Builds the neural encoder based on LSTM or Transformer.
-│   │       │      ├── 🔹 _detect_regime → Proprietary volatility/liquidity state classifier
-│   │       │      ├── 🔹 _calculate_regime_weights → Converts metrics to strategy-ready probabilities  
-│   │       │      ├── 🔹 _extract_statistical_feature →  Extracts statistical features from time-series data.
-│   │       │      ├── 🔹 _volatility_clustering → Measures volatility persistence (GARCH-alternative)
-│   │       │      ├── 🔹 _estimate_hurst →  Estimates the Hurst exponent for trend persistence.
-│   │       │      ├── 🔹 _calculate_enrophy → Quantifies market disorder using information theory
-│   │       │      ├── 🔹 _encode_neural →  Estimates the Hurst exponent for trend persistence.
-│   │       │      ├── 🔹 fit →  Fits the neural encoder to the data.
-│   │       │      ├── 🔹 _create_sliding_windows →  Converts time-series data into sliding windows for training.
-│   │       │      ╰── 🔹 transform→  Extracts features from the input data using the selected method.
-│   │       ╰── 🔹 __name__ == "__main__" →  Demonstrates crisis-period feature extraction
+│   │       │      ├── 🔹 __init__ 
+│   │       │      ├── 🔹 _validate_parameters 
+│   │       │      ├── 🔹 _build_neural_encode
+│   │       │      ├── 🔹 _detect_regime 
+│   │       │      ├── 🔹 _calculate_regime_weights  
+│   │       │      ├── 🔹 _extract_statistical_feature 
+│   │       │      ├── 🔹 _volatility_clustering 
+│   │       │      ├── 🔹 _estimate_hurst 
+│   │       │      ├── 🔹 _calculate_enrophy 
+│   │       │      ├── 🔹 _encode_neural 
+│   │       │      ├── 🔹 fit
+│   │       │      ├── 🔹 _create_sliding_windows 
+│   │       │      ╰── 🔹 transform
+│   │       ╰── 🔹 __name__ == "__main__" →
 │   │     
 │   ├── model_governance/ 🏆  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
-│   │   ├── __init__.py → Initializes the submodule and exposes core governance components.
-│   │   │  ├── 🔹 __all__ → Declares all public symbols available for import.
-│   │   │  │     ├── 🔸 'ModelValidator' → Main interface for running model validation logic
-│   │   │  │     ├── 🔸 'BacktestRunner' → Executes historical backtests for model assessment
-│   │   │  │     ├── 🔸 'StressTestEvaluator' → Runs models against edge-case or extreme scenarios
-│   │   │  │     ├── 🔸 'generate_validation_report' → Produces audit-ready validation reports.
-│   │   │  │     ├── 🔸 'save_validation_results' → Persists validation outputs to disk or DB
-│   │   │  │     ├── 🔸 'load_validation_results' → Loads previously saved validation data
-│   │   │  │     ├── 🔸 'ModelRegistry' → Singleton class managing model version records
-│   │   │  │     ├── 🔸 'ModelVersion' → Encapsulates metadata and logic per model version.
-│   │   │  │     ├── 🔸 'promote_model_to_production' → Flags a version as the current production model
-│   │   │  │     ├── 🔸 'rollback_model_version' → Reverts to a previous production model version
-│   │   │  │     ├── 🔸 'get_production_model' → Retrieves the currently active production model
-│   │   │  │     ├── 🔸 'export_model_package' → Exports a model and metadata as a package
-│   │   │  │     ├── 🔸 'import_model_package' → Loads a model package into the governance system
-│   │   │  │     ├── 🔸 'validate_model_signature' → Verifies the authenticity of a model file
-│   │   │  │     ├── 🔸 'DriftDetector' → Central controller for drift monitoring systems
-│   │   │  │     ├── 🔸 'FeatureDriftAlert' → Triggers alerts on statistical drift in features
-│   │   │  │     ├── 🔸 'PerformanceDriftAlert' → Flags changes in prediction performance over time
-│   │   │  │     ╰── 🔸 'configure_drift_monitoring' → Sets up or updates the drift detection system
-│   │   │  ├── 🔹 initialize_governance → Bootstraps validator, registry, and drift tools
-│   │   │  ╰── 🔹 get_audit_logger → Provides a centralized logger for auditing actions/events
+│   │   ├── __init__.py 
+│   │   │  ├── 🔹 __all__ 
+│   │   │  │     ├── 🔸 'ModelValidator' 
+│   │   │  │     ├── 🔸 'BacktestRunner' 
+│   │   │  │     ├── 🔸 'StressTestEvaluator' 
+│   │   │  │     ├── 🔸 'generate_validation_report' 
+│   │   │  │     ├── 🔸 'save_validation_results' 
+│   │   │  │     ├── 🔸 'load_validation_results' 
+│   │   │  │     ├── 🔸 'ModelRegistry' 
+│   │   │  │     ├── 🔸 'ModelVersion' 
+│   │   │  │     ├── 🔸 'promote_model_to_production' 
+│   │   │  │     ├── 🔸 'rollback_model_version' 
+│   │   │  │     ├── 🔸 'get_production_model' 
+│   │   │  │     ├── 🔸 'export_model_package' 
+│   │   │  │     ├── 🔸 'import_model_package' 
+│   │   │  │     ├── 🔸 'validate_model_signature' 
+│   │   │  │     ├── 🔸 'DriftDetector'
+│   │   │  │     ├── 🔸 'FeatureDriftAlert' 
+│   │   │  │     ├── 🔸 'PerformanceDriftAlert' 
+│   │   │  │     ╰── 🔸 'configure_drift_monitoring' 
+│   │   │  ├── 🔹 initialize_governance 
+│   │   │  ╰── 🔹 get_audit_logger →
 │   │   │
 │   │   ├── drift_monitor.py  📊 → Real-time Model Guardian
 │   │   │   ├── 🔷 class DriftType → Enum: FEATURE/CONCEPT/LABEL/COVARIATE. 
@@ -179,177 +178,177 @@ OptionsIB
 │   │   │   │      ├── 🔹 protect → 
 │   │   │   │      ╰── 🔹 reset →
 │   │   │   ├── 🔷 class DriftMonitor → Main engine for monitoring drifts
-│   │   │   │      ├── 🔹 __init__ → Initializes with model, baseline data, and config
-│   │   │   │      ├── 🔹 _init_reference_stats → Computes mean, std, percentiles, robust covariance
-│   │   │   │      ├── 🔹 check_drift → Full detection pipeline (feature, concept, covariate)
-│   │   │   │      ├── 🔹 _detect_feature_drift → Uses KS + Wasserstein test per feature
-│   │   │   │      ├── 🔹 _detect_concept_drift → Compares model performance (accuracy, precision)
-│   │   │   │      ├── 🔹 _detect_covariate_shift → Multivariate Mahalanobis + KSS
-│   │   │   │      ├── 🔹 _calculate_performance → Selects top-severity alert, logs it
-│   │   │   │      ├── 🔹 _process_alerts → Selects top-severity alert, logs it
-│   │   │   │      ├── 🔹 get_drift_report → Summary report with status + recent alerts
-│   │   │   │      ╰── 🔹 _calculate_feature_stability → Placeholder for long-term stability  (planned)
-│   │   │   ├── 🔷 class DriftConfig → Configuration schema for detecting data drift
-│   │   │   │      ╰── 🔹 class Config → Pydantic config with example values for schema docs
-│   │   │   ├── 🔷 class EWMADriftTracke → EWMA-based drift detector using robust z-scores
-│   │   │   │      ├── 🔹 __init__ → Initializes smoothing factor (alpha) and burn-in period
-│   │   │   │      ├── 🔹 reset → Clears EWMA stats and resets sample counter
-│   │   │   │      ╰── 🔹 update → Updates EWMA with new data, returns anomaly scores
-│   │   │   ├── 🔷 class GlobalTransaction → Context manager for logging transaction scope
-│   │   │   │      ├── 🔹 __init__ → Sets up transaction ID and timeout
-│   │   │   │      ├── 🔹 enter → Logs the beginning of the transaction
-│   │   │   │      ╰── 🔹 exit → Logs commit/rollback depending on error presence
-│   │   │   ├── 🔷 class RollbackFailure → Exception for rollback errors (JPMC-ERR-7.2)
-│   │   │   ├── 🔷 class RollbackReport → Report detailing rollback execution and confirmations
-│   │   │   ├── 🔷 class FreezeReceipt → Result of trading freeze action (duration + regions)
-│   │   │   ├── 🔷 class ValidationResult → Outcome of post-rollback validation (incl. QC metrics)
-│   │   │   ├── 🔷 class RollbackResult → Final rollback status summary (success, failure, etc.)
-│   │   │   ├── 🔷 class CircuitOpenError → Exception for triggered circuit breaker during ops
-│   │   │   ├── 🔷 class TransactionCoordinator → Singleton manager for distributed transactions
-│   │   │   │      ├── 🔹 get_instance → Ensures single instance of the coordinator
-│   │   │   │      ├── 🔹 begin → Starts a new global transaction with timeout
-│   │   │   │      ├── 🔹 commit → Commits transaction if all regions are synced
-│   │   │   │      ╰── 🔹 rollback → Orchestrates rollback across regions if needed
-│   │   │   ├── 🔷 class ModelRegistry → Region-aware model version control system (JPMC-MOD-REG-2.0)
-│   │   │   │      ├── 🔹 __init__ → Initializes registry for a specific region
-│   │   │   │      ├── 🔹 get_primary → Returns the primary region’s registry instance
-│   │   │   │      ├── 🔹 get_secondaries → Lists all non-primary region registries
-│   │   │   │      ├── 🔹 get_instance → Retrieves or creates a region-specific registry
-│   │   │   │      ├── 🔹 current_version → Returns the current active model version
-│   │   │   │      ├── 🔹 register_version → Registers a new model version with metadata
-│   │   │   │      ├── 🔹 promote_to_stable → Marks a version as stable (rollback target)
-│   │   │   │      ├── 🔹 rollback_to_stable → Rolls back to the last validated stable version
-│   │   │   │      ├── 🔹 synchronize_version → Syncs version from primary to current region
-│   │   │   │      ├── 🔹 _generate_version_id → Generates SHA-256 hash for model artifact
-│   │   │   │      ╰── 🔹 _validate_artifact → Checks artifact integrity before rollback
-│   │   │   ├── 🔷 class DriftMonitor → Monitors live model performance for drift and triggers rollbacks if needed
-│   │   │   │      ├── 🔹 __init__ → Initializes model, reference stats, and tracking systems
-│   │   │   │      ├── 🔹 _init_reference_stats → Computes baseline feature stats for drift comparison
-│   │   │   │      ├── 🔹 check_drift → Runs full drift detection pipeline on new data
-│   │   │   │      ├── 🔹 _detect_feature_drift → Detects changes in input feature distributions
-│   │   │   │      ├── 🔹 _detect_concept_drift → Detects model accuracy degradation (if labels exist)
-│   │   │   │      ├── 🔹 _detect_covariate_shift → Detects multivariate shift using robust Mahalanobis
-│   │   │   │      ├── 🔹 _calculate_performance → Computes metrics like accuracy and precision
-│   │   │   │      ├── 🔹 _process_alerts → Handles and logs drift alerts, updates system state
-│   │   │   │      ├── 🔹 get_drift_report → Returns summary report with latest drift findings
-│   │   │   │      ├── 🔹 _calculate_feature_stability → Tracks feature stability using EWMA
-│   │   │   │      ├── 🔹 emergency_rollback → Initiates model rollback under drift crisis
-│   │   │   │      ├── 🔹 _validate_rollback_conditions → Checks if rollback criteria are satisfied
-│   │   │   │      ╰── 🔹 _orchestrate_rollback → Coordinates rollback execution and versioning
-│   │   │   ╰── 🔷 class ModelVersion → Container for versioned model artifacts
+│   │   │   │      ├── 🔹 __init__ 
+│   │   │   │      ├── 🔹 _init_reference_stats 
+│   │   │   │      ├── 🔹 check_drift 
+│   │   │   │      ├── 🔹 _detect_feature_drift 
+│   │   │   │      ├── 🔹 _detect_concept_drift
+│   │   │   │      ├── 🔹 _detect_covariate_shift 
+│   │   │   │      ├── 🔹 _calculate_performance 
+│   │   │   │      ├── 🔹 _process_alerts →
+│   │   │   │      ├── 🔹 get_drift_report 
+│   │   │   │      ╰── 🔹 _calculate_feature_stability 
+│   │   │   ├── 🔷 class DriftConfig 
+│   │   │   │      ╰── 🔹 class Config 
+│   │   │   ├── 🔷 class EWMADriftTracke s
+│   │   │   │      ├── 🔹 __init__ 
+│   │   │   │      ├── 🔹 reset 
+│   │   │   │      ╰── 🔹 update
+│   │   │   ├── 🔷 class GlobalTransaction
+│   │   │   │      ├── 🔹 __init__ 
+│   │   │   │      ├── 🔹 enter 
+│   │   │   │      ╰── 🔹 exit 
+│   │   │   ├── 🔷 class RollbackFailure 
+│   │   │   ├── 🔷 class RollbackReport 
+│   │   │   ├── 🔷 class FreezeReceipt 
+│   │   │   ├── 🔷 class ValidationResult 
+│   │   │   ├── 🔷 class RollbackResult 
+│   │   │   ├── 🔷 class CircuitOpenError 
+│   │   │   ├── 🔷 class TransactionCoordinator 
+│   │   │   │      ├── 🔹 get_instance 
+│   │   │   │      ├── 🔹 begin 
+│   │   │   │      ├── 🔹 commit 
+│   │   │   │      ╰── 🔹 rollback
+│   │   │   ├── 🔷 class ModelRegistry
+│   │   │   │      ├── 🔹 __init__
+│   │   │   │      ├── 🔹 get_primary 
+│   │   │   │      ├── 🔹 get_secondaries 
+│   │   │   │      ├── 🔹 get_instance 
+│   │   │   │      ├── 🔹 current_version 
+│   │   │   │      ├── 🔹 register_version 
+│   │   │   │      ├── 🔹 promote_to_stable 
+│   │   │   │      ├── 🔹 rollback_to_stable 
+│   │   │   │      ├── 🔹 synchronize_version 
+│   │   │   │      ├── 🔹 _generate_version_id 
+│   │   │   │      ╰── 🔹 _validate_artifact →
+│   │   │   ├── 🔷 class DriftMonitor
+│   │   │   │      ├── 🔹 __init__ 
+│   │   │   │      ├── 🔹 _init_reference_stats 
+│   │   │   │      ├── 🔹 check_drift 
+│   │   │   │      ├── 🔹 _detect_feature_drift 
+│   │   │   │      ├── 🔹 _detect_concept_drift
+│   │   │   │      ├── 🔹 _detect_covariate_shift
+│   │   │   │      ├── 🔹 _calculate_performance 
+│   │   │   │      ├── 🔹 _process_alerts 
+│   │   │   │      ├── 🔹 get_drift_report 
+│   │   │   │      ├── 🔹 _calculate_feature_stability 
+│   │   │   │      ├── 🔹 emergency_rollback
+│   │   │   │      ├── 🔹 _validate_rollback_conditions
+│   │   │   │      ╰── 🔹 _orchestrate_rollback 
+│   │   │   ╰── 🔷 class ModelVersion 
 │   │   │   
 │   │   ├── validation_suite.py  🧪     
 │   │   │   ├── 🔷 class TestType → Enum of test types: walk_forward, regime_adaptive, stress_test, monte_carlo
 │   │   │   ├── 🔷 class ValidationResult → Container for test results, metrics, predictions, metadata
 │   │   │   ╰── 🔷 class ValidationSuite → Backtesting & validation engine
-│   │   │          ├── 🔹 __init__ → Setup model, data, risk engine, and config
-│   │   │          ├── 🔹 _init_metrics → Define metrics for classification, regression, trading
-│   │   │          ├── 🔹 _init_scenarios → Load predefined stress test scenarios
-│   │   │          ├── 🔹 run_full_validation → Runs all validation types and stress scenarios
-│   │   │          ├── 🔹 walk_forward_test → Rolling window backtest and retrain strategy
-│   │   │          ├── 🔹 regime_adaptive_test → Evaluate model on different market regimes
-│   │   │          ├── 🔹 run_stress_test → Test model under predefined stress scenarios
-│   │   │          ├── 🔹 monte_carlo_test → Robustness check via perturbation simulations
-│   │   │          ├── 🔹 _calculate_metrics → Compute accuracy, MSE, Sharpe, etc.
-│   │   │          ╰── 🔹 _check_validation_results → Aggregate test outcomes and flag pass/fail
+│   │   │          ├── 🔹 __init__ →
+│   │   │          ├── 🔹 _init_metrics 
+│   │   │          ├── 🔹 _init_scenarios 
+│   │   │          ├── 🔹 run_full_validation 
+│   │   │          ├── 🔹 walk_forward_test 
+│   │   │          ├── 🔹 regime_adaptive_test 
+│   │   │          ├── 🔹 run_stress_test 
+│   │   │          ├── 🔹 monte_carlo_test 
+│   │   │          ├── 🔹 _calculate_metrics 
+│   │   │          ╰── 🔹 _check_validation_results 
 │   │   │ 
 │   │   ╰── version_control.py  🔄 → Model registry
 │   │       ╰── 🔷 class ModelRegistry → Handles model versioning and deployment governance
-│   │              ╰── 🔹 deploy_model → Validates a new model using validation suite and deploys it if checks pass
+│   │              ╰── 🔹 deploy_model 
 │   │ 
 │   ├── strategy_generators/ 🎯
 │   │   ├── reinforcement_agent/  🦾
 │   │   │   ├── __init__.py → Reinforcement learning agent core
 │   │   │   │   ╰── 🔷class RLAgent → Handles policy training, decision-making, and experience replay
-│   │   │   │         ├── 🔹 __init__ → Initializes networks, buffers, configs, and device settings
-│   │   │   │         ├── 🔹 get_action → Selects trading action from market state using policy network
-│   │   │   │         ├── 🔹 store_experience → Adds observation to experience buffer for training
-│   │   │   │         ├── 🔹 update_policy → Trains policy network on sampled experiences
-│   │   │   │         ├── 🔹 train_episode → Runs one training loop episode with environment interaction
-│   │   │   │         ├── 🔹 save_model → Saves the current policy and optimizer state
-│   │   │   │         ├── 🔹 load_model → Loads a saved model checkpoint
-│   │   │   │         ╰── 🔹 _execute_action → Executes trading action and returns reward and new state
-│   │   │   ├── experience_buffer.py → Experience buffer for storing agent observations
+│   │   │   │         ├── 🔹 __init__ 
+│   │   │   │         ├── 🔹 get_action 
+│   │   │   │         ├── 🔹 store_experience 
+│   │   │   │         ├── 🔹 update_policy 
+│   │   │   │         ├── 🔹 train_episode 
+│   │   │   │         ├── 🔹 save_model 
+│   │   │   │         ├── 🔹 load_model 
+│   │   │   │         ╰── 🔹 _execute_action
+│   │   │   ├── experience_buffer.py 
 │   │   │   │   ╰── 🔷 class ExperienceBuffer → Stores and samples agent experiences
-│   │   │   │          ├── 🔹 __init__ → Initializes the buffer with a fixed maximum size
-│   │   │   │          ├── 🔹 add → Appends a new experience to the buffer
-│   │   │   │          ├── 🔹 sample Randomly selects a batch of experiences
-│   │   │   │          ╰── 🔹 __len__ → Returns the current number of stored experiences
+│   │   │   │          ├── 🔹 __init__ 
+│   │   │   │          ├── 🔹 add 
+│   │   │   │          ├── 🔹 sample 
+│   │   │   │          ╰── 🔹 __len__ 
 │   │   │   ╰── policy_network.py Deep → RL policy network for action and value prediction
 │   │   │       ╰── 🔷 class PolicyNetwork → Defines a dual-head network for policy and value estimation
-│   │   │              ├── 🔹 __init__ → Initializes network layers for policy and value heads
-│   │   │              ╰── 🔹 forward → Runs input through the network to get action probabilities and state value
+│   │   │              ├── 🔹 __init__ 
+│   │   │              ╰── 🔹 forward 
 │   │   │    
 │   │   ├──  __init__.py → Strategy generator interface exposing core AI components
 │   │   │    ├── 🔹 __all__ → Lists all public classes and functions exposed by the package
-│   │   │    │    ├── 🔸 'EnsembleStrategyGenerator' → Combines multiple models via voting systems
-│   │   │    │    ├── 🔸 'MODEL_VOTING_SYSTEMS' → Predefined voting mechanisms for ensembles
-│   │   │    │    ├── 🔸 'STRATEGY_WEIGHTING_METHODS' → Methods for weighting model contributions
-│   │   │    │    ├── 🔸 'create_ensemble_model' → Assembles ensemble models from base learners
-│   │   │    │    ├── 🔸 'evaluate_strategy_performance' → Assesses backtest results and fitness
-│   │   │    │    ├── 🔸 'DeepMarketPredictor' → Neural net-based trading strategy model
-│   │   │    │    ├── 🔸 'LSTMMarketModel' → LSTM-based sequence predictor for market data
-│   │   │    │    ├── 🔸 'TemporalFusionTransformer' → Transformer-based forecasting model
-│   │   │    │    ├── 🔸 'NEURAL_ARCHITECTURES' → Registry of supported deep learning models
-│   │   │    │    ├── 🔸 'train_neural_strategy' → Trains deep learning models for trading
-│   │   │    │    ├── 🔸 'predict_market_regimes' → Uses deep learning to classify market conditions
-│   │   │    │    ├── 🔸 'generate_ai_strategy' → Unified pipeline to create an AI-based strategy
-│   │   │    │    ├── 🔸 'optimize_strategy_parameters' → Hyperparameter tuner for strategy models
-│   │   │    │    ╰── 🔸 'get_available_generators' → Lists strategy generator types and metadata
-│   │   │    ├── 🔹 generate_ai_strategy → Builds and trains an AI strategy generator
-│   │   │    ├── 🔹 optimize_strategy_parameters → Runs hyperparameter optimization for generator
-│   │   │    ╰── 🔹 get_available_generators → Lists available generator types with descriptions
+│   │   │    │    ├── 🔸 'EnsembleStrategyGenerator'
+│   │   │    │    ├── 🔸 'MODEL_VOTING_SYSTEMS' 
+│   │   │    │    ├── 🔸 'STRATEGY_WEIGHTING_METHODS' 
+│   │   │    │    ├── 🔸 'create_ensemble_model' 
+│   │   │    │    ├── 🔸 'evaluate_strategy_performance'
+│   │   │    │    ├── 🔸 'DeepMarketPredictor' 
+│   │   │    │    ├── 🔸 'LSTMMarketModel'
+│   │   │    │    ├── 🔸 'TemporalFusionTransformer' 
+│   │   │    │    ├── 🔸 'NEURAL_ARCHITECTURES' 
+│   │   │    │    ├── 🔸 'train_neural_strategy'
+│   │   │    │    ├── 🔸 'predict_market_regimes' 
+│   │   │    │    ├── 🔸 'generate_ai_strategy' 
+│   │   │    │    ├── 🔸 'optimize_strategy_parameters'
+│   │   │    │    ╰── 🔸 'get_available_generators' 
+│   │   │    ├── 🔹 generate_ai_strategy 
+│   │   │    ├── 🔹 optimize_strategy_parameters
+│   │   │    ╰── 🔹 get_available_generators
 │   │   │  
 │   │   │ 
 │   │   ├── deep_architecture.py  🕸️   Integrated with ensemble_learner.py, LSTM-based market model,  TensorFlow/Keras NN
-│   │   │   ╰── 🔷 class MarketLSTM
-│   │   │          ├── 🔹 __init__
-│   │   │          ├── 🔹 call
+│   │   │   ╰── 🔷 class MarketLSTM → LSTM-based neural network for market signal prediction
+│   │   │          ├── 🔹 __init__ 
+│   │   │          ├── 🔹 call 
 │   │   │          ╰── 🔹 generate_signal
 │   │   │ 
-│   │   ├── ensemble_learner.py 🤖        Model voting system
-│   │   │   ╰── 🔷 class OptionStrategyEnsemble
-│   │   │          ├── 🔹 __init__
-│   │   │          ├── 🔹 train
-│   │   │          ╰── 🔹 predict_strategy
+│   │   ├── ensemble_learner.py 🤖  → Model voting system for strategy selection
+│   │   │   ╰── 🔷 class OptionStrategyEnsemble → Ensemble of XGBoost, SVM, and MLP for strategy decisions
+│   │   │          ├── 🔹 __init__ 
+│   │   │          ├── 🔹 train 
+│   │   │          ╰── 🔹 predict_strategy 
 │   │   │ 
-│   │   ╰── reinforcement_agent/  🦾
-│   │       ├── __init__.py
-│   │       │   ╰── 🔷class RLAgent
-│   │       │         ├── 🔹 __init__
-│   │       │         ├── 🔹 get_action
-│   │       │         ├── 🔹 store_experience
-│   │       │         ├── 🔹 update_policy
-│   │       │         ├── 🔹 train_episode
-│   │       │         ├── 🔹 save_model
-│   │       │         ├── 🔹 load_model
-│   │       │         ╰── 🔹 _execute_action
-│   │       ├── policy_network.py 
-│   │       │   ╰── 🔷 class PolicyNetwork
-│   │       │          ├── 🔹 __init__
+│   │   ╰── reinforcement_agent/  🦾  → Reinforcement Learning agent for autonomous strategy training
+│   │       ├── __init__.py → RL agent package initializer with base agent class exposure
+│   │       │   ╰── 🔷class RLAgent → Base agent for RL-based trading strategies
+│   │       │         ├── 🔹 __init__ 
+│   │       │         ├── 🔹 get_action 
+│   │       │         ├── 🔹 store_experience 
+│   │       │         ├── 🔹 update_policy 
+│   │       │         ├── 🔹 train_episode 
+│   │       │         ├── 🔹 save_model 
+│   │       │         ├── 🔹 load_model 
+│   │       │         ╰── 🔹 _execute_action 
+│   │       ├── policy_network.py → Deep RL Policy Network using PPO (Proximal Policy Optimization)
+│   │       │   ╰── 🔷 class PolicyNetwork → Dual-head network for action probabilities and state value
+│   │       │          ├── 🔹 __init__ 
 │   │       │          ╰── 🔹 forward
 │   │       │    
-│   │       ╰── experience_buffer.py 
-│   │           ╰── 🔷 class ExperienceBuffer
-│   │                  ├── 🔹 __init__
-│   │                  ├── 🔹 add
-│   │                  ├── 🔹 sample
-│   │                  ╰── 🔹 __len__
+│   │       ╰── experience_buffer.py → Replay buffer for storing agent-environment interactions
+│   │           ╰── 🔷 class ExperienceBuffer → Fixed-capacity FIFO memory for training samples
+│   │                  ├── 🔹 __init__ → Initialize buffer with configurable maximum capacity
+│   │                  ├── 🔹 add → Append new experience tuple (state, action, reward, next_state, done)
+│   │                  ├── 🔹 sample → Randomly sample a batch of experiences for training
+│   │                  ╰── 🔹 __len__ → Return current size of the buffer
 │   │ 
-│   ╰── __init__.py     AI root exports
-│       ├── 🔹 __all__ 
+│   ╰── __init__.py → Central export hub for all AI/ML components in the options trading system    
+│       ├── 🔹 __all__  → Public API exposing selected models and transformers for external access
 │       │     ├── 🔸 'EnsembleStrategyGenerator'
-│       │     ├── 🔸 'DeepMarketModel'
-│       │     ├── 🔸 'PolicyNetwork'
-│       │     ├── 🔸 'ExperienceBuffer'
-│       │     ├── 🔸 'GreekFeaturePipeline'
-│       │     ├── 🔸 'LatentSpaceEncoder'
-│       │     ├── 🔸 'TemporalPatternEncoder'
-│       │     ├── 🔸 'ModelValidator'
-│       │     ├── 🔸 'ModelVersionControl'
+│       │     ├── 🔸 'DeepMarketModel' 
+│       │     ├── 🔸 'PolicyNetwork' 
+│       │     ├── 🔸 'ExperienceBuffer' 
+│       │     ├── 🔸 'GreekFeaturePipeline' 
+│       │     ├── 🔸 'LatentSpaceEncoder' 
+│       │     ├── 🔸 'TemporalPatternEncoder' 
+│       │     ├── 🔸 'ModelValidator' 
+│       │     ├── 🔸 'ModelVersionControl' 
 │       │     ╰── 🔸 'ConceptDriftDetector'
-│       ├── 🔹 get_model_registry
-│       ╰── 🔹 warmup_models
+│       ├── 🔹 get_model_registry 
+│       ╰── 🔹 warmup_models 
 │ 
 ├── COMMON/  ⚖️  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
 │   ├── __init__.py   
@@ -421,13 +420,13 @@ OptionsIB
 │   │                ├── 🔸 '__version__'
 │   │                ╰── 🔸 '__api_version__'    
 │   │ 
-│   ├── cognitive_layer.py  🧠  Real-time strategy feedback, Market regime adaptation
+│   ├── cognitive_layer.py 🧠 🟢  Real-time strategy feedback, Market regime adaptation
 │   │   ╰── 🔷 class DataRouter
 │   │          ├── 🔹 __init__
 │   │          ├── 🔹 process_signals
 │   │          ╰── 🔹 _generate_adaptive_signals  │
 │   │
-│   ├── data_router.py 📡   
+│   ├── data_router.py 📡 🟢  
 │   │   ╰── 🔷 class DataRouter
 │   │          ├── 🔹 __init__
 │   │          ├── 🔹 _setup_logger
@@ -454,12 +453,16 @@ OptionsIB
 │       │      ├── 🔹 _execute_signal
 │       │      ├── 🔹 _update_positions
 │       │      ├── 🔹 _monitor_executions
+│       │      ├── 🔹 execute
+│       │      ├── 🔹 _validate_market_hours
+│       │      ├── 🔹 _check_liquidity
+│       │      ├── 🔹 _process_market_data
 │       │      ├── 🔹 generate_signals
 │       │      ├── 🔹 run
 │       │      ╰── 🔹 _process_signals
 │       ╰── 🔹 __name__ == "__main__"
 │       
-├── DATA_SYSTEMS/  🌐  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+├── DATA_SYSTEMS/  🌐 ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
 │   ├── historical/ 🗃️  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
 │   │   ├── option_chains/ 📂     # HDF5 storage format, HDF5 compression, Fast retrieval
 │   │   │   ╰── processor.py    
@@ -531,7 +534,7 @@ OptionsIB
 │   │       │      ╰── 🔹 _check_zero_volume
 │   │       ╰── 🔹 __name__ == "__main__"
 │   │     
-│   ├── live_feeds/  📶
+│   ├── live_feeds/  📶 🟢
 │   │   ├── market_data.py  📈    # Real-time TWS stream processor
 │   │   │   ╰── 🔷 class MarketDataEngine
 │   │   │          ├── 🔹 __init__
@@ -544,12 +547,12 @@ OptionsIB
 │   │   │          ├── 🔹 connect
 │   │   │          ╰── 🔹 shutdown│
 │   │   │
-│   │   ├── news_ingestor.py  🗞️    # NewsAPI + NLP pipeline
+│   │   ├── news_ingestor.py 🗞️ 🟢   # NewsAPI + NLP pipeline
 │   │   │   ╰── 🔷 class NewsProcessor
 │   │   │          ├── 🔹 __init__ 
 │   │   │          ╰── 🔹 fetch_news
 │   │   │ 
-│   │   ╰── unusual_activity.py 🕵️‍♂️   # Flow monitoring alerts
+│   │   ╰── unusual_activity.py 🕵️‍♂️ 🟢  # Flow monitoring alerts
 │   │       ╰── 🔷 class FlowAnomalyDetector
 │   │              ├── 🔹 __init__ 
 │   │              ╰── 🔹 check_anomaly
@@ -872,12 +875,17 @@ OptionsIB
 │   │   │  ├── 🔹 get_available_brokers
 │   │   │  ╰── 🔹 ping_broker_connection
 │   │   │
-│   │   ├── ib_gateway.py   ⚠️
+│   │   ├── ib_gateway.py ⚠️ 🟢
 │   │   │  ╰── 🔷 class IBGateway
 │   │   │         ├── 🔹 __init__
-│   │   │         ╰── 🔹 def execute
+│   │   │         ├── 🔹 _validate_config
+│   │   │         ├── 🔹 connect
+│   │   │         ├── 🔹 execute
+│   │   │         ├── 🔹 _parse_execution
+│   │   │         ├── 🔹 _create_contract
+│   │   │         ╰── 🔹 _create_order
 │   │   │ 
-│   │   └── api_abstract.py   📡   Broker-agnostic interface
+│   │   └── api_abstract.py 📡 🟢  Broker-agnostic interface
 │   │       ├── 🔷 class Order
 │   │       ├── 🔷 class Position
 │   │       ├── 🔷 class BrokerAPI
@@ -1056,6 +1064,7 @@ OptionsIB
 │   │        │      ├── 🔹 _bayesian_update
 │   │        │      ├── 🔹 _get_strategy_prior
 │   │        │      ├── 🔹 _parse_shap
+│   │        │      ├── 🔹 analyze_trade
 │   │        │      ├── 🔹 train_luck_model
 │   │        │      ├── 🔹 _prepare_training_data
 │   │        │      ├── 🔹 _calibrate_contamination
@@ -1303,7 +1312,7 @@ OptionsIB
 │       ├── 🔹 initialize_risk_system
 │       ╰── 🔹 get_risk_metrics
 │
-├──  STRATEGY_VAULT/  📊  ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
+├──  STRATEGY_VAULT/  📊  ⚠️ 💰 ⚠️ ❗❗❗ 🛑  S T O P  🛑 ❗❗❗
 │   ├── modular_strategies/   🧩
 │   │   ├── __init__.py      Strategy types 
 │   │   │   ├── 🔹 __all__
@@ -1439,4 +1448,56 @@ OptionsIB
 │
 │
 │
-│
+
+
+Key Explanation:
+
+🟢 LIVE Trading Scripts (green)
+
+   - Will be added later
+
+🔵 HELPER Scripts (Blue)
+
+   - Will be added later
+
+Symbol Legend:
+
+    
+
+    🟢 Green circle = Constantly runing, live script
+
+    🔵 Blue circle = General Python scripts in silent mode (supporting/secondary scripts, helpers)
+    
+    🔷 = Core classes (config/trading/risk)
+
+    🔹 = Functions
+    
+    🔸 = Message, info passing through
+
+    🧠 = Brain ( Symbolizes smart scripts, AI logic, signal processors )
+
+    🚦 = Filter/guard systems (News, part of primary script)
+
+    🛠️ = Builder tools (File uses 🛠️ for adjustable parameters)
+    
+    📦 = Installitation package list
+
+    💾 = Serialized AI assets
+
+    ⚙️ = Configuration files
+
+    📊 Visual Dashboard = Live prediction/indicator charting via Dash ( or FastAPI + WebSockets )
+
+    🔁 Backtesting module = Using existing data fetcher + indicator engine to simulate performance
+    
+    🧪 = Test run
+
+    ⚠️ 💰 ⚠️ = Accessing account funds
+
+    ✅ G O ✅ = Passes all operational checks (production-ready)
+
+    ⚠️ WARNING ⚠️ = Critical failure state (blocks execution)
+
+    ⚠️ ATTENTION ⚠️ = Functional but needs optimization
+
+    ❗❗❗ 🛑  S T O P  🛑 ❗❗❗  = Folders or files not working, still under development  
