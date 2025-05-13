@@ -91,6 +91,7 @@ OptionsIB
 │   │   ╰── temporal_encoding.py 
 │   │     
 │   ├── model_governance/ 🏆  
+│   │   ├── __init__.py
 │   │   │
 │   │   ├── drift_monitor.py  📊 → Real-time Model Guardian
 │   │   │   
@@ -104,20 +105,15 @@ OptionsIB
 │   │   │   │ 
 │   │   │   ├── experience_buffer.py 
 │   │   │   │ 
-│   │   │   ╰── policy_network.py Deep → RL policy network for action and value prediction
+│   │   │   ├── policy_network.py Deep → RL policy network for action and value prediction
+│   │   │   │
+│   │   │   ╰── train_rl_agent.py
 │   │   │    
 │   │   ├──  __init__.py → Strategy generator interface exposing core AI components
 │   │   │  
 │   │   ├── deep_architecture.py  🕸️   Integrated with ensemble_learner.py, LSTM-based market model,  TensorFlow/Keras NN
 │   │   │ 
-│   │   ├── ensemble_learner.py 🤖  → Model voting system for strategy selection
-│   │   │ 
-│   │   ╰── reinforcement_agent/  🦾  → Reinforcement Learning agent for autonomous strategy training
-│   │       ├── __init__.py → RL agent package initializer with base agent class exposure
-│   │       │ 
-│   │       ├── policy_network.py → Deep RL Policy Network using PPO (Proximal Policy Optimization)
-│   │       │    
-│   │       ╰── experience_buffer.py → Replay buffer for storing agent-environment interactions
+│   │   ╰── ensemble_learner.py 🤖  → Model voting system for strategy selection 
 │   │ 
 │   ╰── __init__.py → Central export hub for all AI/ML components in the options trading system    
 │ 
@@ -136,6 +132,8 @@ OptionsIB
 │   ├── environment/
 │   │   ├── 🔹 dev.yaml
 │   │   ╰── 🔹 prod.yaml
+│   │
+│   ├── emails.txt
 │   │ 
 │   ├── main_config.yaml   ⚙️  
 │   │   ├── 🔸 ib_gateway
@@ -153,6 +151,8 @@ OptionsIB
 │   │ 
 │   ├── cognitive_layer.py 🧠 🟢  Real-time strategy feedback, Market regime adaptation
 │   │
+│   ├── dark_pool_radar.py
+│   │
 │   ├── data_router.py 📡 🟢  
 │   │   
 │   ├── execution_engine.py  🟢 ⚡
@@ -163,7 +163,6 @@ OptionsIB
 │   ├── historical/ 🗃️  
 │   │   ├── option_chains/ 📂     # HDF5 storage format, HDF5 compression, Fast retrieval
 │   │   │   ╰── processor.py    
-
 │   │   │
 │   │   ├── regime_datasets/ 📂   🎚️   # Labeled market states
 │   │   │   ╰── regime_classifier.py 
@@ -183,28 +182,34 @@ OptionsIB
 │   │   │
 │   │   ├── news_ingestor.py 🗞️ 🟢   # NewsAPI + NLP pipeline
 │   │   │ 
+│   │   ├── real_time_stream.py
+│   │   │ 
 │   │   ╰── unusual_activity.py 🕵️‍♂️ 🟢  # Flow monitoring alerts
 │   │ 
-│   ├── 🔮 synthetic/ 📂   
+│   ├── synthetic/  🔮 📂  
+│   │   ├── GAN_models/  🧩 📂           Market behavior GANs
+│   │   │   ├── liquidity_gan.py
+│   │   │   │
+│   │   │   ├── spread_generator.py  Generate synthetic spreads, Train on historical arbitrage ops 
+│   │   │   │
+│   │   │   ├── train_gan.py
+│   │   │   │ 
+│   │   │   ╰── volatility_gan.py 
+│   │   │
 │   │   ├── __init__.py     Synthetic data exports  """Central data system configuration"""
 │   │   │
-│   │   ├── monte_carlo.py 🌪️          Options scenario generator
-│   │   │
-│   │   ╰── 🧩 GAN_models/ 📂           Market behavior GANs
-│   │       ├── volatility_gan.py 
-│   │       │
-│   │       ╰── spread_generator.py  Generate synthetic spreads, Train on historical arbitrage ops 
+│   │   ╰── monte_carlo.py 🌪️          Options scenario generator
+│   │   
 │   │
 │   ├── __init__.py     Unified data interface
 │   │
 │   ╰── hybrid.py     
 │
-├──  dependencies/  📦  INFRA   
-│   ├── requirements.txt     📜 
-│   │ 
-│   ╰── docker/    🐳            # Containerization
-│       ├── Dockerfile.api  📜 
-│       ╰── docker-compose.yml   📜
+├── dependencies/  📦  INFRA  
+│   ├── docker/    🐳            # Containerization
+│   │   ├── Dockerfile.api  📜 
+│   │   ╰── docker-compose.yml   📜 
+│   ╰── requirements.txt     📜 
 │
 ├── 🛠️ DEV_TOOLS/  
 │   ├── builder_kit/  🧰   Institutional Strategy Fabrication System
@@ -217,13 +222,17 @@ OptionsIB
 │   ├── testing/   🧪
 │   │   ├── __init__.py    Testing framework
 │   │   │
+│   │   ├── chaos_engine.py
+│   │   │
+│   │   ├── test_data_pipeline.py
+│   │   │
 │   │   ├── 🐜 unit_tests/
-│   │   ├── 🦎 integration/
-│   │   ╰── chaos_engine.py  🧟     Failure simulation
+│   │   ╰── 🦎 integration/
 │   │ 
 │   ╰── __init__.py     Tools root
 │
-├── 📜 governance/ 
+├── governance/ 📜
+│   ├── __init__.py 
 │   │ 
 │   ├── audit_logger.py    📝      # FINRA compliance
 │   │ 
@@ -233,16 +242,18 @@ OptionsIB
 │   ├── 💰 broker_adapters/
 │   │   ├── __init__.py       Broker exports
 │   │   │
-│   │   ├── ib_gateway.py ⚠️ 🟢
-│   │   │ 
-│   │   └── api_abstract.py 📡 🟢  Broker-agnostic interface
+│   │   ├── api_abstract.py 📡 🟢  Broker-agnostic interface
+│   │   │
+│   │   ├── dark_pool_router.py
+│   │   │
+│   │   ╰── ib_gateway.py ⚠️ 🟢
 │   │
-│   ├── 🗄️ storage/  
+│   ├── storage/  🗄️
 │   │   ├── __init__.py     Storage exports
 │   │   │ 
-│   │   ├── snowflake_loader.py   ❄️   Data warehouse
-│   │   │ 
-│   │   └── local_cache.py    🗃️      Redis-backed cache
+│   │   ├── local_cache.py    🗃️      Redis-backed cache
+│   │   │
+│   │   ╰── snowflake_loader.py   ❄️   Data warehouse 
 │   │
 │   ╰── __init__.py      Interfaces root
 │
@@ -259,13 +270,17 @@ OptionsIB
 │   │         
 │   ╰── system_launcher.py     Master process manager  
 │
-├── ⚡ PERFORMANCE/ 
+├── main-env
+│
+├── numpky-mkl-wheels-main
+│
+├── PERFORMANCE/  ⚡
 │   ├── advanced_metrics/   📈
 │   │   ├── __init__.py      Metrics exports
-│   │   │
-│   │   ├── probabilistic_pnl.py  🎯  Monte Carlo sims, VaR calculations   # Monte Carlo PnL
 │   │   │  
-│   │   ╰─── attribution_engine.py   🕵️‍♂️   Win/loss forensics    Strategy decomposer 
+│   │   ├── attribution_engine.py   🕵️‍♂️   Win/loss forensics    Strategy decomposer 
+│   │   │
+│   │   ╰── probabilistic_pnl.py  🎯  Monte Carlo sims, VaR calculations   # Monte Carlo PnL
 │   │
 │   ├── visualization/   📊
 │   │   ├── __init__.py     Viz exports
@@ -274,35 +289,45 @@ OptionsIB
 │   │   │ 
 │   │   ├── migration_dashboard.py
 │   │   │   
-│   │   └── trade_replayer.py  🕵️‍♂️   Historical replay
+│   │   ╰── trade_replayer.py  🕵️‍♂️   Historical replay
 │   │
-│   ├── 🔄 walk_forward/  
+│   ├── walk_forward/  🔄
 │   │   ├── __init__.py       Walkforward tests
 │   │   │ 
 │   │   ├── regime_aware.py   🕰️    Time-period testing
 │   │   │
-│   │   ├── robustness_check.py   🧪    Parameter stress tests
-│   │   │
+│   │   ╰── robustness_check.py   🧪    Parameter stress tests
+│   │   
 │   ╰── __init__.py       Performance root 
 │
 ├── quantum
 │   ├── __init__.py     # Package marker
-│   │   ╰── __all__
 │   │  
+│   ├── q_integrator.py
+│   │ 
 │   ├── q_portfolio.py
+│   │ 
 │   ╰── q_risk.py    
 │
-├── ⚖️ RISK_SYSTEM/ 
-│   ├── 🛡️ armor/
+├── quantum-env
+│
+├── RISK_SYSTEM/  ⚖️
+│   ├── armor/  🛡️
 │   │   ├── __init__.py      Armor submodule
 │   │   │
 │   │   ├── black_swan.py  ☢️      # Tail risk scenarios
 │   │   │ 
 │   │   ├── freeze_detector.py  🧊    # Liquidity alarms
 │   │   │ 
-│   │   ╰── stress_test.py  💥       # Portfolio stress tests
+│   │   ├── liquidity_monitor.py 
+│   │   │ 
+│   │   ├── stress_test.py  💥       # Portfolio stress tests
+│   │   │
+│   │   ╰── volatility_adjuster.py
 │   │    
 │   ├── core/  
+│   │   ├── fair_value_calculator.py 
+│   │   │
 │   │   ╰── risk_engine.py      # CENTRAL RISK COORDINATOR
 │   │
 │   ├── drawdown_control/  📉  
@@ -315,9 +340,11 @@ OptionsIB
 │   ├── hedging/  ⚓ 
 │   │   ├── __init__.py      Hedging submodule
 │   │   │
+│   │   ├── correlation_matrix.py
+│   │   │  
 │   │   ├── dynamic_delta.py  🌓     # Auto-hedging engine
 │   │   │  
-│   │   ╰── correlation_matrix.py  🧩     # Greeks optimizer
+│   │   ╰── hedging_cost_gan.py
 │   │ 
 │   ╰── __init__.py      Risk system root
 │
@@ -325,18 +352,18 @@ OptionsIB
 │   ├── modular_strategies/   🧩
 │   │   ├── __init__.py      Strategy types 
 │   │   │ 
-│   │   ├── volatility_regime.py  🕰️       Market-state ML
+│   │   ├── exotic_pricer.py
 │   │   │
 │   │   ├── spread_optimizer.py  🎭       AI-enhanced spreads
 │   │   │
-│   │   ╰──  exotic_pricer.py       # Structured products
+│   │   ╰── volatility_regime.py  🕰️       Market-state ML
 │   │
 │   ├── strategy_lab/  🧪   
 │   │   ├── __init__.py        Lab tools
 │   │   │ 
-│   │   ├── genetic_evolver.py  🧬     GA strategy designer
-│   │   │ 
-│   │   └── 🧫 combinatorics.py         Strategy mixing
+│   │   ├── 🧫 combinatorics.py         Strategy mixing
+│   │   │
+│   │   ╰── genetic_evolver.py  🧬     GA strategy designer
 │   │
 │   ├── 📜 strategy_tomes/          # Pre-built strategies
 │   │   ├── 📜 strategy_tomes
@@ -364,12 +391,9 @@ OptionsIB
 ├── README.cmd
 │
 ├── start.py
-│   ├── main → 
-│   ├── preflight_checks →  
-│   ╰── __name__ == "__main__" → 
 │
 │
-│
+
 
 
 Key Explanation:
