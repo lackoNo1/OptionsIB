@@ -1,11 +1,1 @@
-As of 07.05.2024
-We are start loading all configs by the newly added functions.
-Start installing packages...
-
-│   │   ├── ib_gateway.py ⚠️ 🟢
-│   │   │  ╰── 🔷 class IBGateway
-│   │   │         ├── 🔹 __init__
-│   │   │         ├── 🔹 _validate_config
-│   │   │         ├── 🔹 connect
-│   │   │         ├── 🔹 execute
-│   │   │         ╰── 🔹 _create_order
+Will be updated
